@@ -32,6 +32,19 @@
   (interactive)
   (indent-current-region-by (- tab-width)))
 
+(unless (fboundp 'kill-whole-line)
+  (defun kill-whole-line (&optional arg)
+    (interactive "p")
+    (unwind-protect
+        (mark-line arg)
+      (kill-region (region-beginning) (region-end)))))
+
+(defun mark-line (arg)
+  (interactive "p")
+  (beginning-of-line nil)
+  (set-mark-command nil)
+  (forward-line arg))
+
 (defun scroll-down-1 ()
   (interactive)
   (scroll-down 1))

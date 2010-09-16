@@ -1,3 +1,5 @@
+(require 'misc)
+
 (global-set-key (kbd "<C-S-down>") 'scroll-up-1)
 (global-set-key (kbd "<C-S-up>") 'scroll-down-1)
 
@@ -6,6 +8,14 @@
 
 (global-set-key (kbd "<M-left>") 'dedent-current-region)
 (global-set-key (kbd "<M-right>") 'indent-current-region)
+(global-set-key (kbd "<M-up>") 'enlarge-window)
+(global-set-key (kbd "<M-down>") 'shrink-window)
+
+(global-set-key (kbd "C-M-SPC") 'mark-line)
+(global-set-key (kbd "C-M-k") 'kill-whole-line)
 
 (global-set-key (kbd "M-#") 'comment-line)
 (global-set-key (kbd "M-+") 'duplicate-line)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+
+(global-set-key (kbd "RET") 'newline-and-indent)
