@@ -11,6 +11,8 @@
 (global-set-key (kbd "<M-up>") 'enlarge-window)
 (global-set-key (kbd "<M-down>") 'shrink-window)
 
+(global-set-key (kbd "<f9>") 'open-shell-pane)
+
 (global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
 

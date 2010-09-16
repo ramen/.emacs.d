@@ -57,6 +57,12 @@
   (set-mark-command nil)
   (forward-line arg))
 
+(defun open-shell-pane ()
+  (interactive)
+  (split-window-vertically -10)
+  (other-window 1)
+  (shell))
+
 (defun scroll-down-1 ()
   (interactive)
   (scroll-down 1))
