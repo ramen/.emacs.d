@@ -6,3 +6,8 @@
 (add-hook 'magit-mode-hook
           (lambda ()
             (set-face-background 'magit-item-highlight "gray20")))
+
+(unless window-system
+  (make-face-bold 'mode-line)
+  (set-face-background 'mode-line "blue")
+  (set-face-background 'region "blue"))
