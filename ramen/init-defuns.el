@@ -70,3 +70,5 @@
 (defun scroll-up-1 ()
   (interactive)
   (scroll-up 1))
+
+(defun turn-on-paredit ())
