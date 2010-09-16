@@ -32,6 +32,18 @@
   (interactive)
   (indent-current-region-by (- tab-width)))
 
+(defun insert-curlies ()
+  (interactive)
+  (end-of-line nil)
+  (just-one-space)
+  (insert-string "{")
+  (newline)
+  (insert-string "}")
+  (indent-according-to-mode)
+  (previous-line 1)
+  (end-of-line nil)
+  (newline-and-indent))
+
 (unless (fboundp 'kill-whole-line)
   (defun kill-whole-line (&optional arg)
     (interactive "p")

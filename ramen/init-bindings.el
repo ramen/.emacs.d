@@ -15,7 +15,9 @@
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
 
 (global-set-key (kbd "M-#") 'comment-line)
+(global-set-key (kbd "M-)") 'close-open-paren)
 (global-set-key (kbd "M-+") 'duplicate-line)
+(global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
