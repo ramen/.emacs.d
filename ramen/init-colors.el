@@ -6,8 +6,8 @@
 (set-face-background 'hl-line "gray10")
 
 (add-hook 'erc-mode-hook
-          '(lambda ()
-             (set-face-foreground 'erc-nick-default-face "#729fcf")))
+          (lambda ()
+            (set-face-foreground 'erc-nick-default-face "#729fcf")))
 
 (add-hook 'magit-mode-hook
           (lambda ()
