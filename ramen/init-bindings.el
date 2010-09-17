@@ -19,6 +19,7 @@
 (global-set-key (kbd "<M-down>") 'shrink-window)
 
 ;; Function keys
+(global-set-key (kbd "<M-f2>") 'align-regexp)
 (global-set-key (kbd "<f3>") 'query-replace)
 (global-set-key (kbd "<M-f3>") 'query-replace-regexp)
 (global-set-key (kbd "<f4>") 'svn-status)
@@ -40,8 +41,9 @@
 ;; Line-oriented commands
 (global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
-(global-set-key (kbd "M-+") 'duplicate-line)
 (global-set-key (kbd "M-#") 'comment-line)
+(global-set-key (kbd "M-+") 'duplicate-line)
+(global-set-key (kbd "M-`") 'next-error)
 
 ;; Other useful commands
 (global-set-key (kbd "C-\\") 'delete-whitespace-forward)
