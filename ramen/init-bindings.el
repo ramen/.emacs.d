@@ -53,3 +53,9 @@
 (global-set-key (kbd "M-q") 'fill-individual-paragraphs)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 (global-set-key (kbd "RET") 'newline-and-indent)
+
+;; Revert swapped bindings from emacs-starter-kit
+(global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward)
+(global-set-key (kbd "C-s") 'isearch-forward)
