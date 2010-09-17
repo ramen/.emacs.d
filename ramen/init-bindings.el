@@ -1,16 +1,24 @@
-(require 'misc)
+;;; init-bindings.el --- Custom key bindings
 
+(require 'misc) ; for zap-up-to-char
+
+;; Scrolling without moving the point
 (global-set-key (kbd "<C-S-down>") 'scroll-up-1)
 (global-set-key (kbd "<C-S-up>") 'scroll-down-1)
 
+;; Cycling through windows and frames
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-multiframe-window)
 (global-set-key (kbd "<C-tab>") 'next-multiframe-window)
 
+;; Indentation
 (global-set-key (kbd "<M-left>") 'dedent-current-region)
 (global-set-key (kbd "<M-right>") 'indent-current-region)
+
+;; Window size
 (global-set-key (kbd "<M-up>") 'enlarge-window)
 (global-set-key (kbd "<M-down>") 'shrink-window)
 
+;; Function keys
 (global-set-key (kbd "<f3>") 'query-replace)
 (global-set-key (kbd "<M-f3>") 'query-replace-regexp)
 (global-set-key (kbd "<f4>") 'svn-status)
@@ -29,17 +37,17 @@
 (global-set-key (kbd "<f12>") 'call-last-kbd-macro)
 (global-set-key (kbd "<M-f12>") 'start-or-end-kbd-macro)
 
+;; Line-oriented commands
 (global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
-
-(global-set-key (kbd "C-\\") 'delete-whitespace-forward)
-
-(global-set-key (kbd "M-#") 'comment-line)
-(global-set-key (kbd "M-)") 'close-open-paren)
 (global-set-key (kbd "M-+") 'duplicate-line)
+(global-set-key (kbd "M-#") 'comment-line)
+
+;; Other useful commands
+(global-set-key (kbd "C-\\") 'delete-whitespace-forward)
+(global-set-key (kbd "M-)") 'close-open-paren)
 (global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-_") 'goto-last-change)
 (global-set-key (kbd "M-q") 'fill-individual-paragraphs)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
-
 (global-set-key (kbd "RET") 'newline-and-indent)

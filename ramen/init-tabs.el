@@ -1,3 +1,5 @@
+;;; init-tabs.el - Tab settings and helper functions
+
 (defun make-tab-stop-list (width max)
   "Build a tab stop list for a given tab width and maximum line width"
   (let ((i width) list)

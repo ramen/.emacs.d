@@ -1,4 +1,7 @@
+;;; init-defuns.el --- Custom functions
+
 (defun comment-line ()
+  "Comment or uncomment the current line."
   (interactive)
   (if (= (line-beginning-position) (line-end-position))
       (next-line 1)
@@ -11,6 +14,7 @@
       (next-line 1))))
 
 (defun delete-whitespace-forward ()
+  "Delete all whitespace between point and the next non-whitespace character."
   (interactive)
   (delete-region
    (point)
@@ -19,6 +23,7 @@
      (point))))
 
 (defun duplicate-line ()
+  "Clone the current line without changing the column position."
   (interactive)
   (let ((col (current-column)))
     (beginning-of-line 1)
@@ -30,22 +35,29 @@
     (move-to-column col)))
 
 (defun follow-mode-quit ()
+  "Quit follow-mode without leaving extra windows around."
   (interactive)
   (delete-other-windows)
   (turn-off-follow-mode))
 
 (defun indent-current-region-by (num-spaces)
+  "Indent the current region by a certain number of spaces."
   (indent-rigidly (region-beginning) (region-end) num-spaces))
 
 (defun indent-current-region ()
+  "Indent the current region by the current tab width."
   (interactive)
   (indent-current-region-by tab-width))
 
 (defun dedent-current-region ()
+  "Dedent the current region by the current tab width."
   (interactive)
   (indent-current-region-by (- tab-width)))
 
 (defun insert-curlies ()
+  "Insert an opening curly brace at the end of the current line, a closing
+curly brace on a new line, and position the point on a new, indented line in
+between."
   (interactive)
   (end-of-line nil)
   (just-one-space)
@@ -59,24 +71,28 @@
 
 (unless (fboundp 'kill-whole-line)
   (defun kill-whole-line (&optional arg)
+    "Kill the entire current line regardless of cursor position."
     (interactive "p")
     (unwind-protect
         (mark-line arg)
       (kill-region (region-beginning) (region-end)))))
 
 (defun mark-line (arg)
+  "Mark the entire current line regardless of cursor position."
   (interactive "p")
   (beginning-of-line nil)
   (set-mark-command nil)
   (forward-line arg))
 
 (defun open-shell-pane ()
+  "Open a small shell window at the bottom of the frame."
   (interactive)
   (split-window-vertically -10)
   (other-window 1)
   (shell))
 
 (defun rotate-windows ()
+  "Swap or rotate windows with their neighbors."
   (interactive)
   (let ((this-buffer (buffer-name)))
     (other-window 1)
@@ -87,10 +103,12 @@
       (other-window 1))))
 
 (defun scroll-down-1 ()
+  "Scroll down by a single line."
   (interactive)
   (scroll-down 1))
 
 (defun scroll-up-1 ()
+  "Scroll up by a single line."
   (interactive)
   (scroll-up 1))
 
@@ -106,4 +124,6 @@
   (interactive)
   (set-variable 'show-trailing-whitespace (not show-trailing-whitespace)))
 
+;; I don't care for paredit-mode, which emacs-starter-kit enables for
+;; lisp-mode by default. Redefining this function disables it.
 (defun turn-on-paredit ())

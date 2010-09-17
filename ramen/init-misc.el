@@ -1,3 +1,5 @@
+;;; init-misc.el --- Things that don't fit anywhere else
+
 (blink-cursor-mode 1)
 (delete-selection-mode 1)
 (winner-mode 1)

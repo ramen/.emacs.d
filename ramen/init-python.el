@@ -1,3 +1,5 @@
+;;; init-python.el - Python mode configuration
+
 (add-hook 'python-mode-hook
           (lambda ()
             (define-key py-mode-map "\C-c\C-l" nil)

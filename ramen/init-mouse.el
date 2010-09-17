@@ -1,3 +1,6 @@
+;;; init-mouse-el --- Mouse configuration
+
+;; Make mouse wheel scroll one line at a time.
 (setq mouse-wheel-progressive-speed nil
       mouse-wheel-scroll-amount '(1))
 

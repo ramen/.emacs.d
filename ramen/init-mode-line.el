@@ -1,3 +1,5 @@
+;;; init-mode-line.el --- Mode line configuration
+
 (setq default-mode-line-format
       (list '(:eval (if (buffer-modified-p) "* " "  "))
             "%20b  %[("
