@@ -39,6 +39,7 @@
 (global-set-key (kbd "M-+") 'duplicate-line)
 (global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-_") 'goto-last-change)
+(global-set-key (kbd "M-q") 'fill-individual-paragraphs)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
 (global-set-key (kbd "RET") 'newline-and-indent)
