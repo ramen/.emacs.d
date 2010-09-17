@@ -13,6 +13,7 @@
   (setq c-basic-offset width)
   (setq sgml-basic-offset width)
   (setq javascript-indent-level width)
+  (setq espresso-indent-level width)
   (setq css-indent-offset width)
   (setq indent-tabs-mode use-tabs)
   (setq tab-stop-list (make-tab-stop-list width 80))
