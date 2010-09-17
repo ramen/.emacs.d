@@ -10,6 +10,14 @@
       (back-to-indentation)
       (next-line 1))))
 
+(defun delete-whitespace-forward ()
+  (interactive)
+  (delete-region
+   (point)
+   (progn
+     (skip-chars-forward " \t")
+     (point))))
+
 (defun duplicate-line ()
   (interactive)
   (let ((col (current-column)))
@@ -20,6 +28,11 @@
     (yank)
     (previous-line 1)
     (move-to-column col)))
+
+(defun follow-mode-quit ()
+  (interactive)
+  (delete-other-windows)
+  (turn-off-follow-mode))
 
 (defun indent-current-region-by (num-spaces)
   (indent-rigidly (region-beginning) (region-end) num-spaces))
@@ -63,6 +76,16 @@
   (other-window 1)
   (shell))
 
+(defun rotate-windows ()
+  (interactive)
+  (let ((this-buffer (buffer-name)))
+    (other-window 1)
+    (let ((that-buffer (buffer-name)))
+      (switch-to-buffer this-buffer)
+      (other-window -1)
+      (switch-to-buffer that-buffer)
+      (other-window 1))))
+
 (defun scroll-down-1 ()
   (interactive)
   (scroll-down 1))
@@ -70,5 +93,17 @@
 (defun scroll-up-1 ()
   (interactive)
   (scroll-up 1))
+
+(defun start-or-end-kbd-macro ()
+  "Start defining a keyboard macro, or stop if we're already defining."
+  (interactive)
+  (if defining-kbd-macro
+      (end-kbd-macro)
+    (start-kbd-macro nil)))
+
+(defun toggle-show-trailing-whitespace ()
+  "Toggles the highlighting of trailing whitespace."
+  (interactive)
+  (set-variable 'show-trailing-whitespace (not show-trailing-whitespace)))
 
 (defun turn-on-paredit ())
