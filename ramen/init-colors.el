@@ -7,7 +7,9 @@
 
 (add-hook 'erc-mode-hook
           (lambda ()
-            (set-face-foreground 'erc-nick-default-face "#729fcf")))
+            (set-face-foreground 'erc-input-face "#fcaf3e")
+            (set-face-foreground 'erc-nick-default-face "#729fcf")
+            (set-face-foreground 'erc-timestamp-face "gray30")))
 
 (add-hook 'magit-mode-hook
           (lambda ()
