@@ -1,6 +1,6 @@
 ;;; init-mode-line.el --- Mode line configuration
 
-(setq default-mode-line-format
+(setq mode-line-format
       (list '(:eval (if (buffer-modified-p) "* " "  "))
             "%20b  %[("
             'mode-name
@@ -9,6 +9,7 @@
             '(which-func-mode ("" which-func-format "  "))
             '(line-number-mode "Line %3l  ")
             '(column-number-mode "Col %2c  ")
-            'default-directory))
+            'default-directory
+            (make-string 1000 ? )))
 
-(setq mode-line-format default-mode-line-format)
+(setq default-mode-line-format mode-line-format)
