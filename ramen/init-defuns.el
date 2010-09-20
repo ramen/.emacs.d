@@ -1,5 +1,15 @@
 ;;; init-defuns.el --- Custom functions
 
+(defun bold-all-faces ()
+  "Adds bolding to all defined faces."
+  (interactive)
+  (mapc 'make-face-bold (face-list)))
+
+(defun unbold-all-faces ()
+  "Removes bolding from all defined faces."
+  (interactive)
+  (mapc 'make-face-unbold (face-list)))
+
 (defun comment-line ()
   "Comment or uncomment the current line."
   (interactive)
