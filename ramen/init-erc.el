@@ -1,4 +1,7 @@
 ;;; init-erc.el --- ERC customizations
 
-(set-variable 'erc-nick "ramenboy")
-(set-variable 'erc-nick-uniquifier "_")
+(setq erc-nick "ramenboy"
+      erc-nick-uniquifier "_"
+      erc-notice-prefix "# "
+      erc-prompt (lambda ()
+                   (concat "[" (or (erc-default-target) "ERC") "]")))
