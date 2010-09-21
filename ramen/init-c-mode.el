@@ -1,4 +1,4 @@
-;;; init-c-mode.el - c-mode settings
+;;; init-c-mode.el --- c-mode settings
 
 (add-hook 'c-mode-common-hook
           (lambda ()

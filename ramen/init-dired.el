@@ -1,4 +1,4 @@
-;;; init-dired.el - Dired mode customizations
+;;; init-dired.el --- Dired mode customizations
 
 (add-hook 'dired-mode-hook
           (lambda ()

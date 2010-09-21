@@ -1,4 +1,4 @@
-;;; init-python.el - Python mode configuration
+;;; init-python.el --- Python mode configuration
 
 (add-hook 'python-mode-hook
           (lambda ()
