@@ -23,5 +23,7 @@
   (define-key key-translation-map (kbd "ESC O c") (kbd "<C-right>"))
   (define-key key-translation-map (kbd "ESC O d") (kbd "<C-left>"))
   (define-key key-translation-map (kbd "ESC [ 7 ^") (kbd "<C-home>"))
+  (define-key key-translation-map (kbd "ESC [ 7 ~") (kbd "<home>"))
   (define-key key-translation-map (kbd "ESC [ 8 ^") (kbd "<C-end>"))
+  (define-key key-translation-map (kbd "ESC [ 8 ~") (kbd "<end>"))
 )
