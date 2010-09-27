@@ -7,6 +7,7 @@
 (setq auto-save-default nil
       initial-scratch-message nil
       line-move-visual nil
+      mark-even-if-inactive t
       mode-line-in-non-selected-windows nil
       parens-require-spaces nil
       ring-bell-function 'ignore
