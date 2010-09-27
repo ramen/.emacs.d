@@ -2,6 +2,7 @@
 
 (add-hook 'python-mode-hook
           (lambda ()
+            (run-coding-hook)
             (define-key py-mode-map "\C-c\C-l" nil)
             (define-key py-mode-map "\C-c\C-r" 'py-execute-region)
             (define-key py-mode-map "\C-c\C-s" 'py-shell)
