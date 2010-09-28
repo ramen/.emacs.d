@@ -137,3 +137,6 @@ between."
 ;; I don't care for paredit-mode, which emacs-starter-kit enables for
 ;; lisp-mode by default. Redefining this function disables it.
 (defun turn-on-paredit ())
+
+;; I don't like idle-highlight either.
+(remove-hook 'coding-hook 'idle-highlight)
