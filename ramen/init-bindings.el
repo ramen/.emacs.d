@@ -38,6 +38,10 @@
 (global-set-key (kbd "<f12>") 'call-last-kbd-macro)
 (global-set-key (kbd "<M-f12>") 'start-or-end-kbd-macro)
 
+;; Easier bindings for winner-mode
+(global-set-key (kbd "C-c <C-left>") 'winner-undo)
+(global-set-key (kbd "C-c <C-right>") 'winner-redo)
+
 ;; Line-oriented commands
 (global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
