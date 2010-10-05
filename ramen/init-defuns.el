@@ -94,6 +94,24 @@ between."
   (set-mark-command nil)
   (forward-line arg))
 
+(defun move-region-down (arg)
+  (interactive "p")
+  (unless mark-active (mark-line 1))
+  (kill-region (region-beginning) (region-end))
+  (unwind-protect
+      (forward-line arg)
+    (yank))
+  (setq deactivate-mark nil))
+
+(defun move-region-up (arg)
+  (interactive "p")
+  (unless mark-active (mark-line 1))
+  (kill-region (region-beginning) (region-end))
+  (unwind-protect
+      (forward-line (- arg))
+    (yank))
+  (setq deactivate-mark nil))
+
 (defun open-shell-pane ()
   "Open a small shell window at the bottom of the frame."
   (interactive)
