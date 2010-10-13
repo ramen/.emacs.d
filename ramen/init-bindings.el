@@ -65,3 +65,6 @@
 (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward)
 (global-set-key (kbd "C-s") 'isearch-forward)
+
+;; Revert clobbered mule bindings from emacs-starter-kit
+(define-key ctl-x-map (kbd "RET") mule-keymap)
