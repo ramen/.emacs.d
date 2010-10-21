@@ -13,7 +13,6 @@ that hides boring files and directories like rgrep does."
                             (shell-quote-argument "(")
                             " "
                             (shell-quote-argument "(")
-                            ;; we should use shell-quote-argument here
                             " -path "
                             (mapconcat
                              #'(lambda (ignore)
@@ -37,7 +36,6 @@ that hides boring files and directories like rgrep does."
                             (shell-quote-argument "(")
                             " "
                             (shell-quote-argument "(")
-                            ;; we should use shell-quote-argument here
                             " -name "
                             (mapconcat
                              #'(lambda (ignore)
