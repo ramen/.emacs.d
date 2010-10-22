@@ -10,4 +10,4 @@
 (setq dired-recursive-copies 'top)
 (setq dired-recursive-deletes 'top)
 
-(setq find-ls-option '("-ls" . "-dils"))
+(setq find-ls-option '("-ls" . "-bdils"))
