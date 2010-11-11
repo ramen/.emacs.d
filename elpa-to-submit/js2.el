@@ -10165,6 +10165,7 @@ If so, we don't ever want to use bounce-indent."
                                (back-to-indentation)
                                (setq current-indent (current-column))
                                (point))))
+    (if (< offset 0) (back-to-indentation))
     (js2-with-underscore-as-word-syntax
      (if (nth 4 parse-status)
          (js2-lineup-comment parse-status)
