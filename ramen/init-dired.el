@@ -9,3 +9,5 @@
 
 (setq dired-recursive-copies 'top)
 (setq dired-recursive-deletes 'top)
+
+(defalias 'fndired 'find-name-dired)
