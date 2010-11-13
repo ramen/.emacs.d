@@ -5,6 +5,8 @@
 that hides boring files and directories like rgrep does."
   (interactive "DBase directory: ")
   (require 'grep)
+  (unless (boundp 'grep-find-ignored-files)
+    (setq grep-find-ignored-files '()))
   (find-dired dir
               ;; Ripped from rgrep
               (concat
