@@ -19,12 +19,16 @@
           (lambda ()
             (set-face-background 'magit-item-highlight "gray20")))
 
+(add-hook 'tuareg-mode-hook
+          (lambda ()
+            (set-face-foreground 'tuareg-font-lock-operator-face "gray30")))
+
 (set-face-background 'show-paren-match "gray30")
 
 (unless window-system
   (make-face-bold 'default)
   (make-face-unbold 'font-lock-constant-face)
-  (make-face-unbold 'font-lock-keyword-face)
+  (make-face-unbold 'ido-only-match)
   (make-face-unbold 'isearch)
   (set-face-background 'mode-line "gray")
   (set-face-background 'region "gray")
@@ -36,6 +40,7 @@
   (set-face-foreground 'font-lock-preprocessor-face "blue")
   (set-face-foreground 'font-lock-function-name-face "blue")
   (set-face-foreground 'font-lock-string-face "green")
+  (set-face-foreground 'font-lock-variable-name-face "white")
   (set-face-foreground 'isearch "black")
   (set-face-foreground 'isearch-lazy-highlight-face "black")
   (set-face-foreground 'minibuffer-prompt "blue")
