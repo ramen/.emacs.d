@@ -30,6 +30,7 @@
   (set-face-background 'region "gray")
   (set-face-background 'show-paren-match "gray")
   (set-face-background 'show-paren-mismatch "red")
+  (set-face-foreground 'esk-paren-face "black")
   (set-face-foreground 'font-lock-function-name-face "blue")
   (set-face-foreground 'font-lock-string-face "green")
   (set-face-foreground 'isearch "black")
