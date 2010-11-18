@@ -38,4 +38,5 @@
   (set-face-foreground 'font-lock-string-face "green")
   (set-face-foreground 'isearch "black")
   (set-face-foreground 'isearch-lazy-highlight-face "black")
-  (set-face-foreground 'minibuffer-prompt "blue"))
+  (set-face-foreground 'minibuffer-prompt "blue")
+  (set-face-foreground 'mode-line "black"))
