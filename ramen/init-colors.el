@@ -34,6 +34,7 @@
   (set-face-background 'region "gray")
   (set-face-background 'show-paren-match "gray")
   (set-face-background 'show-paren-mismatch "red")
+  (set-face-foreground 'default "white")
   (set-face-foreground 'esk-paren-face "black")
   (set-face-foreground 'font-lock-comment-face "black")
   (set-face-foreground 'font-lock-comment-delimiter-face "black")
