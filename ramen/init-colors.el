@@ -23,14 +23,14 @@
 
 (unless window-system
   (make-face-bold 'default)
-  (make-face-bold 'mode-line)
-  (make-face-bold 'region)
   (make-face-unbold 'isearch)
   (set-face-background 'mode-line "gray")
   (set-face-background 'region "gray")
   (set-face-background 'show-paren-match "gray")
   (set-face-background 'show-paren-mismatch "red")
   (set-face-foreground 'esk-paren-face "black")
+  (set-face-foreground 'font-lock-comment-face "black")
+  (set-face-foreground 'font-lock-comment-delimiter-face "black")
   (set-face-foreground 'font-lock-function-name-face "blue")
   (set-face-foreground 'font-lock-string-face "green")
   (set-face-foreground 'isearch "black")
