@@ -23,6 +23,8 @@
 
 (unless window-system
   (make-face-bold 'default)
+  (make-face-unbold 'font-lock-constant-face)
+  (make-face-unbold 'font-lock-keyword-face)
   (make-face-unbold 'isearch)
   (set-face-background 'mode-line "gray")
   (set-face-background 'region "gray")
@@ -31,7 +33,9 @@
   (set-face-foreground 'esk-paren-face "black")
   (set-face-foreground 'font-lock-comment-face "black")
   (set-face-foreground 'font-lock-comment-delimiter-face "black")
+  (set-face-foreground 'font-lock-preprocessor-face "blue")
   (set-face-foreground 'font-lock-function-name-face "blue")
   (set-face-foreground 'font-lock-string-face "green")
   (set-face-foreground 'isearch "black")
-  (set-face-foreground 'isearch-lazy-highlight-face "black"))
+  (set-face-foreground 'isearch-lazy-highlight-face "black")
+  (set-face-foreground 'minibuffer-prompt "blue"))
