@@ -38,6 +38,11 @@
 (global-set-key (kbd "<f12>") 'call-last-kbd-macro)
 (global-set-key (kbd "<M-f12>") 'start-or-end-kbd-macro)
 
+;; Buffer switching using bs-show
+(global-set-key (kbd "C-x C-b") 'bs-show)
+(global-set-key (kbd "C-x <C-left>") 'bs-cycle-previous)
+(global-set-key (kbd "C-x <C-right>") 'bs-cycle-next)
+
 ;; Easier bindings for winner-mode
 (global-set-key (kbd "C-c <C-left>") 'winner-undo)
 (global-set-key (kbd "C-c <C-right>") 'winner-redo)
