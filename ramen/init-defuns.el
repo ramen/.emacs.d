@@ -166,3 +166,6 @@ between."
 
 ;; I don't like idle-highlight either.
 (remove-hook 'coding-hook 'idle-highlight)
+
+;; Don't use auto-fill by default in text modes.
+(remove-hook 'text-mode-hook 'turn-on-auto-fill)
