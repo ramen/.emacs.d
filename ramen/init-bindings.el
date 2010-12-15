@@ -59,6 +59,7 @@
 (global-set-key (kbd "C-M-n") 'move-region-down)
 (global-set-key (kbd "C-M-p") 'move-region-up)
 (global-set-key (kbd "C-\\") 'delete-whitespace-forward)
+(global-set-key (kbd "M-&") 'insert-indentation)
 (global-set-key (kbd "M-)") 'close-open-paren)
 (global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-_") 'goto-last-change)
