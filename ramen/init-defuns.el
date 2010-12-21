@@ -63,7 +63,7 @@ good destination for the assignment and yank."
     (kill-append var-name t)
     (unless (eq major-mode 'python-mode)
       (kill-append ";" nil))
-    (insert-string var-name)))
+    (insert var-name)))
 
 (defun follow-mode-quit ()
   "Quit follow-mode without leaving extra windows around."
@@ -92,9 +92,9 @@ between."
   (interactive)
   (end-of-line nil)
   (just-one-space)
-  (insert-string "{")
+  (insert "{")
   (newline)
-  (insert-string "}")
+  (insert "}")
   (indent-according-to-mode)
   (previous-line 1)
   (end-of-line nil)
