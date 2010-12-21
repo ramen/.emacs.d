@@ -52,6 +52,19 @@
     (previous-line 1)
     (move-to-column col)))
 
+(defun extract-variable ()
+  "Micro-refactoring: replace the region with a variable and save an
+assignment statement in the kill ring. After calling this function, find a
+good destination for the assignment and yank."
+  (interactive)
+  (let ((var-name (read-string "Variable name: ")))
+    (kill-region (region-beginning) (region-end))
+    (kill-append " = " t)
+    (kill-append var-name t)
+    (unless (eq major-mode 'python-mode)
+      (kill-append ";" nil))
+    (insert-string var-name)))
+
 (defun follow-mode-quit ()
   "Quit follow-mode without leaving extra windows around."
   (interactive)
