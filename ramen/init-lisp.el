@@ -1,5 +1,8 @@
 ;;; init-lisp.el --- Lisp mode configuration
 
+;; Use lisp-interaction-mode by default for Emacs Lisp files.
+(add-to-list 'auto-mode-alist '("\\.el$" . lisp-interaction-mode))
+
 ;; Revert binding from emacs-starter-kit (reindent-then-newline-and-indent),
 ;; which interferes with delete-selection-mode.
 (define-key lisp-mode-shared-map (kbd "RET") nil)
