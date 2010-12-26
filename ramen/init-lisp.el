@@ -16,3 +16,7 @@
      (point))
    t t)
   (setq deactivate-mark nil))
+
+;; Enable dimmed parentheses in lisp-interaction-mode.
+(font-lock-add-keywords 'lisp-interaction-mode
+                        '(("(\\|)" . 'esk-paren-face)))
