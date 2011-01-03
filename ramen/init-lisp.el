@@ -14,7 +14,6 @@
   (interactive)
   (push-mark 
    (save-excursion
-     (insert " ")
      (eval-last-sexp t)
      (point))
    t t)
