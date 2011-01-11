@@ -22,3 +22,7 @@
 ;; Enable dimmed parentheses in lisp-interaction-mode.
 (font-lock-add-keywords 'lisp-interaction-mode
                         '(("(\\|)" . 'esk-paren-face)))
+
+;; Set up SLIME if it's available.
+(when (require 'slime nil t)
+  (slime-setup '(slime-fancy slime-banner)))
