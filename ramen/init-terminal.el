@@ -32,4 +32,5 @@
   (define-key key-translation-map (kbd "ESC [ 8 ~") (kbd "<end>"))
   (defun pretty-lambdas ())
   (xterm-mouse-mode 1)
-  (mouse-wheel-mode 1))
+  (if (fboundp 'mouse-wheel-mode)
+      (mouse-wheel-mode 1)))
