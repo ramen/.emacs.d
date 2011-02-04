@@ -33,8 +33,8 @@
 (global-set-key (kbd "<M-f8>") 'follow-mode-quit)
 (global-set-key (kbd "<f9>") 'open-shell-pane)
 (global-set-key (kbd "<M-f9>") 'linum-mode)
-(global-set-key (kbd "<f11>") 'bookmark-jump)
-(global-set-key (kbd "<M-f11>") 'bookmark-set)
+(global-set-key (kbd "<f11>") 'darkroom-mode-small)
+(global-set-key (kbd "<M-f11>") 'darkroom-mode)
 (global-set-key (kbd "<f12>") 'call-last-kbd-macro)
 (global-set-key (kbd "<M-f12>") 'start-or-end-kbd-macro)
 
