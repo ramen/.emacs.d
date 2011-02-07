@@ -25,4 +25,6 @@
 
 ;; Set up SLIME if it's available.
 (when (require 'slime nil t)
-  (slime-setup '(slime-fancy slime-banner)))
+  ;; Disable fancy features until more recent SLIME is in ELPA.
+  ;; (slime-setup '(slime-fancy slime-banner))
+  (slime-setup))
