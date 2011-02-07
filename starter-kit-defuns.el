@@ -4,6 +4,7 @@
 
 (require 'thingatpt)
 (require 'imenu)
+(require 'w32-fullscreen)
 
 ;; Network
 
@@ -250,11 +251,12 @@ Symbols matching the text at point are put first in the completion list."
 
 (defun toggle-fullscreen ()
   (interactive)
-  ;; TODO: this only works for X. patches welcome for other OSes.
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                         '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                         '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
+  (if (eq window-system 'w32)
+      (w32-fullscreen)
+    (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                           '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+    (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+                           '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))))
 
 
 ;; A monkeypatch to cause annotate to ignore whitespace
