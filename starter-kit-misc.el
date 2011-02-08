@@ -40,14 +40,11 @@
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
 ;; Set this to whatever browser you use
-;; (setq browse-url-browser-function 'browse-url-firefox)
-;; (setq browse-url-browser-function 'browse-default-macosx-browser)
-;; (setq browse-url-browser-function 'browse-default-windows-browser)
-;; (setq browse-url-browser-function 'browse-default-kde)
-;; (setq browse-url-browser-function 'browse-default-epiphany)
-;; (setq browse-url-browser-function 'browse-default-w3m)
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "sensible-browser")
+(case window-system
+  (w32 (setq browse-url-browser-function 'browse-url-default-windows-browser))
+  (mac (setq browse-url-browser-function 'browse-url-default-macosx-browser))
+  (otherwise (setq browse-url-browser-function 'browse-url-generic
+                   browse-url-generic-program "sensible-browser")))
 
 ;; Transparently open compressed files
 (auto-compression-mode t)
