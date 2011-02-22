@@ -18,7 +18,7 @@
       ring-bell-function 'ignore
       scroll-preserve-screen-position t
       sentence-end-double-space nil
-      tramp-default-method "sshx"
+      tramp-default-method "ssh"
       uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 (setq-default fill-column 78)
