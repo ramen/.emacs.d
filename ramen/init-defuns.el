@@ -108,6 +108,15 @@ reverse."
   (delete-horizontal-space)
   (newline-and-indent))
 
+(defun insert-random-password (arg)
+  (interactive "P")
+  (let ((pw-chars "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
+        (pw-length (if arg (prefix-numeric-value arg) 8)))
+    (while (> pw-length 0)
+      (let ((offset (random (length pw-chars))))
+        (insert (substring pw-chars offset (+ offset 1)))
+        (setq pw-length (- pw-length 1))))))
+
 (unless (fboundp 'kill-whole-line)
   (defun kill-whole-line (&optional arg)
     "Kill the entire current line regardless of cursor position."
