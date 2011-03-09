@@ -109,6 +109,8 @@ reverse."
   (newline-and-indent))
 
 (defun insert-random-password (arg)
+  "Insert a randomly generated password. Use a prefix argument to change the
+default length of 8 characters."
   (interactive "P")
   (let ((pw-chars "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
         (pw-length (if arg (prefix-numeric-value arg) 8)))
