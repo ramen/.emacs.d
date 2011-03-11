@@ -12,3 +12,8 @@
             (setq py-shell-switch-buffers-on-execute nil)
             (cond ((fboundp 'subword-mode) (subword-mode 1))
                   ((fboundp 'c-subword-mode) (c-subword-mode 1)))))
+
+(defun py-convert-unicode (start end)
+  (interactive "r")
+  (let ((command (concat user-specific-dir "/convert-unicode.py")))
+    (shell-command-on-region start end command nil t)))
