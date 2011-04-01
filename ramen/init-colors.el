@@ -27,6 +27,7 @@
 
 (unless window-system
   (make-face-bold 'default)
+  (make-face-unbold 'font-lock-keyword-face)
   (make-face-unbold 'font-lock-type-face)
   (make-face-unbold 'font-lock-warning-face)
   (make-face-unbold 'ido-only-match)
