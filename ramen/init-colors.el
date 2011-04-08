@@ -26,11 +26,15 @@
 (set-face-background 'show-paren-match "gray30")
 
 (unless window-system
+  (add-hook 'dired-mode-hook
+            (lambda ()
+              (set-face-foreground 'dired-header "yellow")))
   (make-face-bold 'default)
   (make-face-unbold 'font-lock-type-face)
   (make-face-unbold 'font-lock-warning-face)
   (make-face-unbold 'ido-only-match)
   (make-face-unbold 'isearch)
+  (set-face-background 'isearch "yellow")
   (set-face-background 'mode-line "gray")
   (set-face-background 'region "gray")
   (set-face-background 'show-paren-match "gray")
@@ -47,4 +51,6 @@
   (set-face-foreground 'isearch-lazy-highlight-face "black")
   (set-face-foreground 'minibuffer-prompt "blue")
   (set-face-foreground 'match "black")
-  (set-face-foreground 'mode-line "black"))
+  (set-face-foreground 'mode-line "black")
+  (set-face-foreground 'show-paren-match "black")
+  (set-face-foreground 'show-paren-mismatch "white"))
