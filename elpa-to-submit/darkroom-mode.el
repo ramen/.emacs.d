@@ -129,10 +129,9 @@
   (darkroom-remember 'frame-left (frame-parameter nil 'left))
   (darkroom-remember 'frame-top (frame-parameter nil 'top))
   ; - set
-  (cond ((eq window-system 'w32)
-           (w32-fullscreen-on))
-         ((eq window-system 'mac)
-           (set-frame-parameter nil 'fullscreen 'fullboth)))
+  (if (eq window-system 'w32)
+      (w32-fullscreen-on)
+    (set-frame-parameter nil 'fullscreen 'fullboth))
   (darkroom-mode-set-enabled t)
   (message (format "darkroom mode enabled on %s" (selected-frame))))
 
@@ -176,11 +175,10 @@
 	 (setq-default right-margin-width
 		       (darkroom-recall 'right-margin-width))))
   (darkroom-mode-update-window)
-  ; - restore frame size	 
-  (cond ((eq window-system 'w32) 
-           (w32-fullscreen-off))
-         ((eq window-system 'mac)
-         (set-frame-parameter nil 'fullscreen nil)))
+  ; - restore frame size
+  (if (eq window-system 'w32)
+      (w32-fullscreen-off)
+    (set-frame-parameter nil 'fullscreen nil))
   (darkroom-mode-recall-frame-size)
   (darkroom-mode-set-enabled nil)
   (message (format "darkroom-mode disabled on %s" (selected-frame)))

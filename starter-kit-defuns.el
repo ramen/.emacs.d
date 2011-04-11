@@ -253,11 +253,13 @@ Symbols matching the text at point are put first in the completion list."
   (interactive)
   (if (eq window-system 'w32)
       (w32-fullscreen)
-    (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                           '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-    (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                           '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))))
-
+    ;; http://www.emacswiki.org/emacs/FullScreen
+    (let ((current-value (frame-parameter nil 'fullscreen)))
+      (set-frame-parameter nil 'fullscreen
+                           (if (equal 'fullboth current-value)
+                               (if (boundp 'old-fullscreen) old-fullscreen nil)
+                             (progn (setq old-fullscreen current-value)
+                                    'fullboth))))))
 
 ;; A monkeypatch to cause annotate to ignore whitespace
 (defun vc-git-annotate-command (file buf &optional rev)
