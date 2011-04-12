@@ -41,6 +41,7 @@
   (set-face-background 'show-paren-mismatch "red")
   (set-face-foreground 'default "black")
   (set-face-foreground 'esk-paren-face "white")
+  (set-face-foreground 'font-lock-builtin-face "blue")
   (set-face-foreground 'font-lock-comment-face "white")
   (set-face-foreground 'font-lock-comment-delimiter-face "white")
   (set-face-foreground 'font-lock-preprocessor-face "blue")
