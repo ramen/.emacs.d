@@ -10,3 +10,7 @@
             (define-key magit-mode-map (kbd "C-2") 'magit-show-level-2-all)
             (define-key magit-mode-map (kbd "C-3") 'magit-show-level-3-all)
             (define-key magit-mode-map (kbd "C-4") 'magit-show-level-4-all)))
+
+;; I know there's a keyboard shortcut for this.
+;; That doesn't mean I have to like it.
+(defalias 'vc-blame 'vc-annotate)
