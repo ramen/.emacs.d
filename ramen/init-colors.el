@@ -24,6 +24,7 @@
             (set-face-foreground 'tuareg-font-lock-operator-face "gray30")))
 
 (set-face-background 'show-paren-match "gray30")
+(setq vc-annotate-background "unspecified")
 
 (unless window-system
   (add-hook 'dired-mode-hook
