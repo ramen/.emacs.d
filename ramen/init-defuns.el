@@ -187,6 +187,11 @@ default length of 8 characters."
       (end-kbd-macro)
     (start-kbd-macro nil)))
 
+(defun textile-table (start end)
+  "Convert a region of tab-delimited text to a textile-formatted table."
+  (interactive "r")
+  (replace-regexp "^\\|$\\|	" "|" nil start end))
+
 (defun toggle-show-trailing-whitespace ()
   "Toggles the highlighting of trailing whitespace."
   (interactive)
