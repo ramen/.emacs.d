@@ -34,7 +34,7 @@
   (define-key key-translation-map (kbd "ESC [ 7 ~") (kbd "<home>"))
   (define-key key-translation-map (kbd "ESC [ 8 ^") (kbd "<C-end>"))
   (define-key key-translation-map (kbd "ESC [ 8 ~") (kbd "<end>"))
-  (defun pretty-lambdas ())
+  (remove-hook 'coding-hook 'pretty-lambdas)
   (xterm-mouse-mode 1)
   (if (fboundp 'mouse-wheel-mode)
       (mouse-wheel-mode 1)))
