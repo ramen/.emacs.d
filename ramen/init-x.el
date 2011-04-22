@@ -37,4 +37,10 @@
   (global-set-key [s-mouse-2] 'x-paste)
 
   ;; Fix old issue with bitmap font rendering.
-  (setq x-use-underline-position-properties nil))
+  (setq x-use-underline-position-properties nil)
+
+  ;; Fancy color map for shell-mode, etc.
+  (setq ansi-color-names-vector
+        ["#eeeeec" "#cc0000" "#458b00" "#f57900"
+         "#729fcf" "#6255bc" "#00ffff" "#888a85"])
+  (setq ansi-color-map (ansi-color-make-color-map)))
