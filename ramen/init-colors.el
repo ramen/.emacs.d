@@ -26,6 +26,13 @@
 (set-face-background 'show-paren-match "gray30")
 (setq vc-annotate-background "unspecified")
 
+(when window-system
+  ;; Fancy color map for shell-mode, etc.
+  (setq ansi-color-names-vector
+        ["#eeeeec" "#cc0000" "#458b00" "#f57900"
+         "#729fcf" "#6255bc" "#00ffff" "#888a85"])
+  (setq ansi-color-map (ansi-color-make-color-map)))
+
 (unless window-system
   (add-hook 'dired-mode-hook
             (lambda ()
