@@ -36,7 +36,8 @@
 (unless window-system
   (add-hook 'dired-mode-hook
             (lambda ()
-              (set-face-foreground 'dired-header "yellow")))
+              (set-face-foreground 'dired-header "yellow")
+              (set-face-foreground 'dired-ignored "gray")))
   (make-face-bold 'default)
   (make-face-unbold 'font-lock-type-face)
   (make-face-unbold 'font-lock-warning-face)
