@@ -19,6 +19,7 @@
 (global-set-key (kbd "<M-down>") 'shrink-window)
 
 ;; Function keys
+(global-set-key (kbd "<M-f1>") 'toggle-text-mode-fontified)
 (global-set-key (kbd "<M-f2>") 'align-regexp)
 (global-set-key (kbd "<f3>") 'query-replace)
 (global-set-key (kbd "<M-f3>") 'query-replace-regexp)
@@ -65,7 +66,11 @@
 (global-set-key (kbd "M-_") 'goto-last-change)
 (global-set-key (kbd "M-q") 'fill-individual-paragraphs)
 (global-set-key (kbd "M-z") 'zap-up-to-char)
+
+;; Bind return to newline-and-indent except in text-mode
 (global-set-key (kbd "RET") 'newline-and-indent)
+(add-hook 'text-mode-hook
+          (lambda () (local-set-key (kbd "RET") 'newline)))
 
 ;; Revert swapped bindings from emacs-starter-kit
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)

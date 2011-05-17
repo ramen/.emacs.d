@@ -197,6 +197,16 @@ default length of 8 characters."
   (interactive)
   (set-variable 'show-trailing-whitespace (not show-trailing-whitespace)))
 
+(defun toggle-text-mode-fontified ()
+  "Toggles text-mode while preserving fontification."
+  (interactive)
+  (if (eq major-mode 'text-mode)
+      (if (boundp 'last-major-mode)
+          (funcall last-major-mode))
+    (flet ((font-lock-change-mode () ()))
+      (setq last-major-mode major-mode)
+      (text-mode))))
+
 ;; I don't care for paredit-mode, which emacs-starter-kit enables for
 ;; lisp-mode by default. Redefining this function disables it.
 (defun turn-on-paredit ())
