@@ -2,6 +2,8 @@ loaddefs.el*
 backups/*
 auto-save-list
 custom.el
+daveb.el
+ramen.el
 *elc
 places
 url/cookies
