@@ -8,6 +8,7 @@
 
 ;; Cycling through windows and frames
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-multiframe-window)
+(global-set-key (kbd "<C-S-tab>") 'previous-multiframe-window)
 (global-set-key (kbd "<C-tab>") 'next-multiframe-window)
 
 ;; Indentation
