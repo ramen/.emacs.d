@@ -5,9 +5,12 @@
 (delete-selection-mode 1)
 (winner-mode 1)
 
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'scroll-left 'disabled nil)
+(mapc (lambda (cmd) (put cmd 'disabled nil))
+      '(downcase-region
+        upcase-region
+        narrow-to-page
+        narrow-to-region
+        scroll-left))
 
 (setq auto-save-default nil
       initial-scratch-message nil
