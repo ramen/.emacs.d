@@ -31,7 +31,10 @@
   (setq ansi-color-names-vector
         ["#eeeeec" "#ff0000" "#458b00" "#f57900"
          "#729fcf" "#6255bc" "#00ffff" "#888a85"])
-  (setq ansi-color-map (ansi-color-make-color-map)))
+  (setq ansi-color-map (ansi-color-make-color-map))
+
+  ;; OSX clobbers this for some reason.
+  (set-face-background 'region "#555753"))
 
 (unless window-system
   (add-hook 'dired-mode-hook

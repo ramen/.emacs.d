@@ -83,3 +83,6 @@
 
 ;; Revert clobbered mule bindings from emacs-starter-kit
 (define-key ctl-x-map (kbd "RET") mule-keymap)
+
+;; Fix delete key on OSX
+(global-set-key (kbd "<kp-delete>") 'delete-char)
