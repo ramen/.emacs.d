@@ -1,5 +1,12 @@
 ;;; init-git.el --- Git and Magit customizations
 
+(require 'git-blame)
+
+(setq git-blame-prefix-format "%h %20.20a ")
+
+(defalias 'git-blame 'git-blame-mode)
+(defalias 'vc-blame 'vc-annotate)
+
 (add-hook 'magit-mode-hook
           (lambda ()
             (define-key magit-mode-map (kbd "M-1") 'digit-argument)
@@ -14,7 +21,3 @@
 
 (eval-after-load 'magit
   '(magit-key-mode-insert-switch 'pushing "-u" "Set upstream" "-u"))
-
-;; I know there's a keyboard shortcut for this.
-;; That doesn't mean I have to like it.
-(defalias 'vc-blame 'vc-annotate)
