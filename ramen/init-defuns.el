@@ -180,13 +180,6 @@ default length of 8 characters."
   (interactive)
   (scroll-up 1))
 
-(defun self-insert-pair (n)
-  "Insert a pair of the character you type and put point inside the pair."
-  (interactive "p")
-  (self-insert-command n)
-  (save-excursion
-    (self-insert-command n)))
-
 (defun start-or-end-kbd-macro ()
   "Start defining a keyboard macro, or stop if we're already defining."
   (interactive)
