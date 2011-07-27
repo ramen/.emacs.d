@@ -20,3 +20,17 @@
 
 (eval-after-load 'magit
   '(magit-key-mode-insert-switch 'pushing "-u" "Set upstream" "-u"))
+
+(defun magit-ido-completing-read (prompt choices &optional predicate require-match initial-input hist def)
+  "ido-based completing-read almost-replacement."
+  (require 'ido)
+  (let ((selected (ido-completing-read prompt (if (consp (first choices))
+                                                  (mapcar #'car choices)
+                                                choices)
+                                       predicate require-match initial-input hist def)))
+    (if (consp (first choices))
+        (or (cdr (assoc selected choices))
+            selected)
+      selected)))
+
+(setq magit-completing-read-function 'magit-ido-completing-read)
