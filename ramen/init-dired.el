@@ -2,6 +2,7 @@
 
 (add-hook 'dired-mode-hook
           (lambda ()
+            (define-key dired-mode-map "." 'dired-up-directory)
             (define-key dired-mode-map "e" 'wdired-change-to-wdired-mode)
             (setq truncate-lines t)))
 
