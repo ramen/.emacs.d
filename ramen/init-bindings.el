@@ -75,6 +75,12 @@
 (add-hook 'text-mode-hook
           (lambda () (local-set-key (kbd "RET") 'newline)))
 
+;; Don't let shells steal C-up and C-down
+(add-hook 'comint-mode-hook
+          (lambda ()
+            (local-set-key (kbd "<C-up>") nil)
+            (local-set-key (kbd "<C-down>") nil)))
+
 ;; Revert swapped bindings from emacs-starter-kit
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
