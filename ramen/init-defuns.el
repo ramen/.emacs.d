@@ -61,7 +61,7 @@ good destination for the assignment and yank."
     (kill-region (region-beginning) (region-end))
     (kill-append " = " t)
     (kill-append var-name t)
-    (unless (eq major-mode 'python-mode)
+    (unless (member major-mode '(python-mode ruby-mode))
       (kill-append ";" nil))
     (insert var-name)))
 
