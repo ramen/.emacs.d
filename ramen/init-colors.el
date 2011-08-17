@@ -17,7 +17,7 @@
 
 (add-hook 'magit-mode-hook
           (lambda ()
-            (set-face-background 'magit-item-highlight "gray20")))
+            (set-face-background 'magit-item-highlight "gray10")))
 
 (add-hook 'tuareg-mode-hook
           (lambda ()
