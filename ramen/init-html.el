@@ -3,7 +3,8 @@
 (add-hook 'sgml-mode-hook
           (lambda ()
             (run-coding-hook)
-            (local-set-key (kbd "RET") nil)))
+            (local-set-key (kbd "RET") nil)
+            (zencoding-mode)))
 
 (eval-after-load 'sgml-mode
   '(progn
