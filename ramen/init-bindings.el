@@ -44,12 +44,14 @@
 (global-set-key (kbd "C-x C-b") 'bs-show)
 (global-set-key (kbd "C-x <C-left>") 'bs-cycle-previous)
 (global-set-key (kbd "C-x <C-right>") 'bs-cycle-next)
-(global-set-key (kbd "<s-left>") 'bs-cycle-previous)
-(global-set-key (kbd "<s-right>") 'bs-cycle-next)
+(global-set-key (kbd "<M-s-left>") 'bs-cycle-previous)
+(global-set-key (kbd "<M-s-right>") 'bs-cycle-next)
 
 ;; Easier bindings for winner-mode
 (global-set-key (kbd "C-c <C-left>") 'winner-undo)
 (global-set-key (kbd "C-c <C-right>") 'winner-redo)
+(global-set-key (kbd "<s-left>") 'winner-undo)
+(global-set-key (kbd "<s-right>") 'winner-redo)
 
 ;; Line-oriented commands
 (global-set-key (kbd "C-M-SPC") 'mark-line)
