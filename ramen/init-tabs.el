@@ -16,7 +16,7 @@
                  css-indent-offset css-indent-level
                  espresso-indent-level javascript-indent-level
                  python-indent
-                 sgml-basic-offset
+                 sgml-basic-offset zencoding-indentation
                  standard-indent tab-width))
     (set var width)))
 
