@@ -34,7 +34,15 @@
   (define-key key-translation-map (kbd "ESC [ 7 ~") (kbd "<home>"))
   (define-key key-translation-map (kbd "ESC [ 8 ^") (kbd "<C-end>"))
   (define-key key-translation-map (kbd "ESC [ 8 ~") (kbd "<end>"))
+
   (remove-hook 'coding-hook 'pretty-lambdas)
+
+  (require 'mouse)
+  (defalias 'track-mouse 'ignore)
   (xterm-mouse-mode 1)
+
   (if (fboundp 'mouse-wheel-mode)
-      (mouse-wheel-mode 1)))
+      (mouse-wheel-mode 1)
+    (progn
+      (global-set-key (kbd "<mouse-4>") 'scroll-down-1)
+      (global-set-key (kbd "<mouse-5>") 'scroll-up-1))))
