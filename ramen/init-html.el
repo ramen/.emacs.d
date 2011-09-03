@@ -8,5 +8,6 @@
 
 (eval-after-load 'sgml-mode
   '(progn
-     (setcdr (assoc "p" html-tag-alist) nil)
-     (setcdr (assoc "br" html-tag-alist) '(t))))
+     (setcdr (assoc "br" html-tag-alist) '(t))
+     (setcdr (assoc "li" html-tag-alist) nil)
+     (setcdr (assoc "p" html-tag-alist) nil)))
