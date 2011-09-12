@@ -40,6 +40,16 @@
      (skip-chars-forward " \t")
      (point))))
 
+(defun dired-vc-log ()
+  "Show a change log for the current file in a dired buffer."
+  (interactive)
+  (let* ((file-buffer (dired-find-file-other-window))
+         (log-buffer (save-window-excursion (vc-print-log)))
+         (log-window (get-buffer-window log-buffer)))
+    (switch-to-buffer log-buffer)
+    (kill-buffer file-buffer)
+    (set-window-dedicated-p log-window t)))
+
 (defun duplicate-line ()
   "Clone the current line without changing the column position."
   (interactive)
