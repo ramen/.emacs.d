@@ -19,6 +19,16 @@
           (lambda ()
             (set-face-background 'magit-item-highlight "gray10")))
 
+(add-hook 'speedbar-mode-hook
+          (lambda ()
+            (set-face-background 'speedbar-highlight-face "#444444")
+            (set-face-background 'speedbar-separator-face "#2e3436")
+            (set-face-foreground 'speedbar-button-face "#888a85")
+            (set-face-foreground 'speedbar-directory-face "#729fcf")
+            (set-face-foreground 'speedbar-file-face "#eeeeec")
+            (set-face-foreground 'speedbar-selected-face "#73d216")
+            (set-face-foreground 'speedbar-tag-face "#6255bc")))
+
 (add-hook 'tuareg-mode-hook
           (lambda ()
             (set-face-foreground 'tuareg-font-lock-operator-face "gray30")))

@@ -6,6 +6,9 @@
           (lambda ()
             (define-key speedbar-file-key-map "." 'speedbar-up-directory)))
 
-(setq speedbar-show-unknown-files t)
-(setq speedbar-use-images nil)
-(setq sr-speedbar-right-side nil)
+(setq speedbar-show-unknown-files t
+      speedbar-use-images nil
+      sr-speedbar-right-side nil)
+
+;; Kill it with fire.
+(defun speedbar-set-timer (timeout))
