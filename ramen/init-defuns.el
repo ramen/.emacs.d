@@ -224,5 +224,8 @@ default length of 8 characters."
 ;; I don't like idle-highlight-mode either.
 (remove-hook 'coding-hook 'turn-on-idle-highlight)
 
+;; I use global-hl-line-mode.
+(remove-hook 'coding-hook 'turn-on-hl-line-mode)
+
 ;; Don't use auto-fill by default in text modes.
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)
