@@ -35,6 +35,7 @@
 (global-set-key (kbd "<M-f8>") 'follow-mode-quit)
 (global-set-key (kbd "<f9>") 'open-shell-pane)
 (global-set-key (kbd "<M-f9>") 'sr-speedbar-toggle)
+(global-set-key (kbd "<C-M-f9>") 'speedbar-refresh)
 (global-set-key (kbd "<f11>") 'toggle-fullscreen)
 (global-set-key (kbd "<M-f11>") 'darkroom-mode)
 (global-set-key (kbd "<f12>") 'call-last-kbd-macro)

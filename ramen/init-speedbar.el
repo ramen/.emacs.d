@@ -8,7 +8,5 @@
 
 (setq speedbar-show-unknown-files t
       speedbar-use-images nil
+      sr-speedbar-auto-refresh nil
       sr-speedbar-right-side nil)
-
-;; Kill it with fire.
-(defun speedbar-set-timer (timeout))
