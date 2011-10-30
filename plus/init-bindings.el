@@ -55,6 +55,8 @@
 (global-set-key (kbd "<s-right>") 'winner-redo)
 
 ;; Line-oriented commands
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
 (global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
 (global-set-key (kbd "M-#") 'comment-line)
