@@ -5,7 +5,7 @@
 (add-hook 'speedbar-mode-hook
           (lambda ()
             (define-key speedbar-file-key-map "." 'speedbar-up-directory)
-            (mapc 'speedbar-add-supported-extension '(".rb" ".js"))))
+            (mapc 'speedbar-add-supported-extension '(".css" ".js" ".rb"))))
 
 (setq speedbar-show-unknown-files t
       speedbar-use-images nil
