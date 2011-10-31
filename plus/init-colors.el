@@ -27,7 +27,7 @@
             (set-face-foreground 'speedbar-directory-face "#729fcf")
             (set-face-foreground 'speedbar-file-face "#eeeeec")
             (set-face-foreground 'speedbar-selected-face "#73d216")
-            (set-face-foreground 'speedbar-tag-face "#6255bc")))
+            (set-face-foreground 'speedbar-tag-face "#ad7fa8")))
 
 (add-hook 'tuareg-mode-hook
           (lambda ()
@@ -35,6 +35,13 @@
 
 (set-face-background 'show-paren-match "gray30")
 (setq vc-annotate-background "unspecified")
+
+;; http://www.emacswiki.org/emacs/FlyMake#toc17
+(custom-set-faces
+ '(flymake-errline ((((class color)) (:underline "red"))))
+ '(flymake-warnline ((((class color)) (:underline "orange"))))
+ '(js2-error-face ((((class color)) (:underline "red"))))
+ '(js2-warning-face ((((class color)) (:underline "orange")))))
 
 (when window-system
   ;; Fancy color map for shell-mode, etc.
