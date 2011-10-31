@@ -9,6 +9,7 @@
                                    'inf-ruby
                                    'css-mode
                                    'yaml-mode
+                                   'tuareg
                                    'find-file-in-project
                                    'magit
                                    'gist)
