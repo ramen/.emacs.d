@@ -1,5 +1,6 @@
 ;;; init-git.el --- Git and Magit customizations
 
+(require 'format-spec)
 (require 'git-blame)
 
 (setq git-blame-prefix-format "%h %20.20a ")
