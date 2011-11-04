@@ -88,6 +88,9 @@
             (local-set-key (kbd "<C-up>") nil)
             (local-set-key (kbd "<C-down>") nil)))
 
+;; C-z should be a NOOP. -God
+(global-set-key (kbd "C-z") 'ignore)
+
 ;; Revert swapped bindings from emacs-starter-kit
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
