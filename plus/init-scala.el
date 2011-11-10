@@ -1,5 +1,7 @@
 ;;; init-scala.el --- Scala mode configuration
 
+(require 'sbt)
+
 (add-hook 'scala-mode-hook
           (lambda ()
             (run-coding-hook)
