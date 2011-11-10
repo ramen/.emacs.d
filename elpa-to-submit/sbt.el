@@ -3,6 +3,7 @@
 (eval-when-compile (require 'cl))
 (require 'tool-bar)
 (require 'compile)
+(require 'comint)
 
 (defgroup sbt nil
   "Run SBT REPL as inferior of Emacs, parse error messages."
@@ -12,9 +13,9 @@
 (defconst sbt-copyright    "Copyright (C) 2008 Raymond Paul Racine")
 (defconst sbt-copyright-2  "Portions Copyright (C) Free Software Foundation")
 
-(defconst sbt-version      "0.02")
-(defconst sbt-author-name  "Raymond Racine")
-(defconst sbt-author-email "ray.racine@gamail.com")
+(defconst sbt-version      "0.03-SNAPSHOT")
+(defconst sbt-authors-name  '("Luke Amdor" "Raymond Racine"))
+(defconst sbt-authors-email '("luke.amdor@gmail.com" "ray.racine@gamail.com"))
 
 (defconst sbt-legal-notice
   "This is free software; you can redistribute it and/or modify it under the
@@ -37,15 +38,67 @@ see the file `COPYING'.  If not, write to the Free Software Foundation, Inc.,
   :type 'string
   :group 'sbt)
 
-(defun sbt-build-buffer-name (mode)
- "*Scala Build Tool*")
+(defcustom sbt-build-buffer-name "*Simple Build Tool*"
+  "Buffer name for sbt"
+  :type 'string :group 'sbt)
 
-(defun sbt-shell ()
+(defcustom sbt-use-ui nil
+  "Use unit-test to show failure/success in mode line"
+  :group 'sbt
+  :type 'boolean)
+
+(if (and sbt-use-ui (require 'unit-test nil t))
+    (progn
+      (defun sbt-update-ui (status)
+        (mapcar (lambda (buffer)
+                  (with-current-buffer buffer
+                    (if (eq status 'quit)
+                        (show-test-none)
+                      (show-test-status status))))
+                (remove-if 'minibufferp (buffer-list))))))
+
+(defun sbt-process-output (output)
+  (let ((cleaned-output (replace-regexp-in-string ansi-color-regexp "" output)))
+    (if sbt-use-ui
+        (cond
+         ((string-match "\\[info\\] == test-start ==" cleaned-output) (sbt-update-ui 'running))
+         ((string-match "\\[error\\] " cleaned-output) (sbt-update-ui 'failed))
+         ((string-match "\\[success\\] " cleaned-output) (sbt-update-ui 'passed))
+         ((string-match "\\[info\\] Total session time" cleaned-output) (sbt-update-ui 'quit))))))
+
+(defun sbt ()
   "Launch the sbt shell."
   (interactive)
-  (compile (concat "cd " (sbt-find-path-to-project) "; sbt") t)
-  (pop-to-buffer (sbt-build-buffer-name nil))
-  (end-of-buffer))
+  (let ((buffer (shell sbt-build-buffer-name)))
+    (set (make-local-variable 'compilation-error-regexp-alist)
+         '(("^\\[error\\] \\([_.a-zA-Z0-9/-]+[.]scala\\):\\([0-9]+\\):" 1 2 nil 2 nil)))
+    (set (make-local-variable 'compilation-mode-font-lock-keywords)
+         '(("^\\[error\\] Error running compile:"
+            (0 compilation-error-face))
+           ("^\\[warn\\][^\n]*"
+            (0 compilation-warning-face))
+           ("^\\(\\[info\\]\\)\\([^\n]*\\)"
+            (0 compilation-info-face)
+            (1 compilation-line-face))
+           ("^\\[success\\][^\n]*"
+            (0 compilation-info-face))))
+    (set (make-local-variable 'compilation-auto-jump-to-first-error) t)
+    (set (make-local-variable 'comint-scroll-to-bottom-on-output) t)
+    (set (make-local-variable 'comint-output-filter-functions) '(sbt-process-output
+                                                                 ansi-color-process-output
+                                                                 comint-postoutput-scroll-to-bottom))
+    (local-set-key (kbd "C-c C-a") 'sbt-switch)
+    (compilation-shell-minor-mode t)
+    (comint-send-string buffer (concat "cd " (sbt-find-path-to-project) "\n sbt\n"))))
+
+(defun sbt-switch ()
+  "Switch to the sbt shell (create if necessary) if or if already there, back"
+  (interactive)
+  (if (equal sbt-build-buffer-name (buffer-name))
+      (switch-to-buffer (other-buffer))
+    (if (get-buffer sbt-build-buffer-name)
+        (switch-to-buffer sbt-build-buffer-name)
+      (sbt))))
 
 (defun sbt-clear ()
   "Clear (erase) the SBT buffer."
@@ -53,30 +106,6 @@ see the file `COPYING'.  If not, write to the Free Software Foundation, Inc.,
   (with-current-buffer (sbt-build-buffer-name nil)
     (let ((inhibit-read-only t))
       (erase-buffer))))
-
-(customize-set-variable 'scala-compile-error-regex  
-			'("^\\[error\\] \\([.a-zA-Z0-9/-]+[.]scala\\):\\([0-9]+\\):" 1 2 nil 2 nil))  
-(customize-set-variable 'compilation-buffer-name-function 'sbt-build-buffer-name)  
-(customize-set-variable 'compilation-error-regexp-alist (list scala-compile-error-regex))
-(customize-set-variable 'compilation-mode-font-lock-keywords
-			'(("^\\[error\\] Error running compile:"
-			   (0 compilation-error-face))
-			  ("^\\[warn\\][^\n]*"
-			   (0 compilation-warning-face))
-			  ("^\\(\\[info\\]\\)\\([^\n]*\\)"
-			   (0 compilation-info-face)
-			   (1 compilation-line-face))
-			  ("^\\[success\\][^\n]*"
-			   (0 compilation-info-face))))
-
-(customize-set-variable 'comint-prompt-read-only t)
-(customize-set-variable 'compilation-buffer-name-function 
-			'sbt-build-buffer-name)
-(customize-set-variable 'compilation-error-regexp-alist 
-			(list scala-compile-error-regex))  
-(set 'compilation-auto-jump-to-first-error t)
-
-(ansi-color-for-comint-mode-on)
 
 ;; Locate the project root directory from the source buffer location.
 
@@ -92,15 +121,15 @@ see the file `COPYING'.  If not, write to the Free Software Foundation, Inc.,
   "The parent path for the given path."
   (file-truename (concat path "/..")))
 
-;; Search up the directory tree until directory with a "project" subdir 
+;; Search up the directory tree until directory with a "project" subdir
 ;; is found with build.properties
 (defun sbt-find-path-to-project ()
   "Move up the directory tree for the current buffer until root or a directory with a project/build.properities is found."
   (interactive)
-  (let ((fn (buffer-file-name)))
-    (let ((path (file-name-directory fn)))
-      (while (and (not (sbt-project-dir-p path))
-		  (not (sbt-at-root path)))
-	(setf path (file-truename (sbt-parent-path path))))
-      path)))
+  (let ((path default-directory))
+    (while (and (not (sbt-project-dir-p path))
+                (not (sbt-at-root path)))
+      (setf path (file-truename (sbt-parent-path path))))
+    path))
 
+(provide 'sbt)
