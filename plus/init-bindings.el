@@ -57,7 +57,6 @@
 ;; Line-oriented commands
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
-(global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
 (global-set-key (kbd "M-#") 'comment-line)
 (global-set-key (kbd "M-+") 'duplicate-line)
@@ -65,6 +64,7 @@
 (global-set-key (kbd "M-g") 'goto-line)
 
 ;; Other useful commands
+(global-set-key (kbd "C-M-SPC") 'cycle-thing-region)
 (global-set-key (kbd "C-M-n") 'move-region-down)
 (global-set-key (kbd "C-M-p") 'move-region-up)
 (global-set-key (kbd "C-\\") 'delete-whitespace-forward)
@@ -72,6 +72,7 @@
 (global-set-key (kbd "M-'") 'insert-pair)
 (global-set-key (kbd "M-\"") 'insert-pair)
 (global-set-key (kbd "M-)") 'close-open-paren)
+(global-set-key (kbd "M-@") 'mark-thing)
 (global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-_") 'goto-last-change)
 (global-set-key (kbd "M-q") 'fill-individual-paragraphs)
