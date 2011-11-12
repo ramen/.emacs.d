@@ -10,7 +10,10 @@
             (define-key scala-mode-map (kbd "RET")
               (lambda () (interactive)
                 (setq last-command nil)
-                (newline-and-indent)))))
+                (newline-and-indent)))
+            (set (make-local-variable 'compile-command)
+                 (format "cd %s && sbt compile"
+                         (locate-dominating-file default-directory "project")))))
 
 (defun scala-goto-block-start (block-start)
   (real-goto-char block-start)
