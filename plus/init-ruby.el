@@ -2,7 +2,10 @@
 
 (add-hook 'ruby-mode-hook
           (lambda ()
-            (setq ruby-insert-encoding-magic-comment nil)))
+            (setq ruby-insert-encoding-magic-comment nil)
+            (set (make-local-variable 'compile-command)
+                 (format "cd %s && bundle exec rake spec"
+                         (locate-dominating-file default-directory "Rakefile")))))
 
 (add-hook 'inf-ruby-mode-hook
           (lambda ()
