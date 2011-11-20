@@ -6,9 +6,9 @@
             'mode-name
             'minor-mode-alist
             ")%]  "
-            '(which-func-mode ("" which-func-format "  "))
             '(line-number-mode "Line %3l  ")
             '(column-number-mode "Col %2c  ")
+            '(which-func-mode ("" which-func-format "  "))
             'default-directory
             (make-string 1000 ? )))
 
