@@ -23,6 +23,7 @@
       sentence-end-double-space nil
       split-width-threshold nil
       tramp-default-method "sshx"
-      uniquify-buffer-name-style 'post-forward-angle-brackets)
+      uniquify-buffer-name-style 'post-forward-angle-brackets
+      which-func-modes t)
 
 (setq-default fill-column 78)

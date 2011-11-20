@@ -33,6 +33,9 @@
           (lambda ()
             (set-face-foreground 'tuareg-font-lock-operator-face "gray30")))
 
+(eval-after-load 'which-func
+  '(set-face-foreground 'which-func "unspecified"))
+
 (set-face-background 'show-paren-match "gray30")
 (setq vc-annotate-background "unspecified")
 
