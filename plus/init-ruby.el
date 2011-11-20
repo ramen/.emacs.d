@@ -5,10 +5,7 @@
             (setq ruby-insert-encoding-magic-comment nil)
             (set (make-local-variable 'compile-command)
                  (format "cd %s && bundle exec rake spec"
-                         (locate-dominating-file default-directory "Rakefile")))
-            (set (make-local-variable 'eldoc-documentation-function)
-                 'ruby-add-log-current-method)
-            (eldoc-mode 1)))
+                         (locate-dominating-file default-directory "Rakefile")))))
 
 (add-hook 'inf-ruby-mode-hook
           (lambda ()
