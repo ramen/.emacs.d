@@ -10,18 +10,17 @@
   (interactive)
   (mapc 'make-face-unbold (face-list)))
 
-(defun comment-line ()
+(defun comment-line (arg)
   "Comment or uncomment the current line."
-  (interactive)
-  (if (= (line-beginning-position) (line-end-position))
-      (next-line 1)
-    (progn
-      (back-to-indentation)
-      (set-mark-command nil)
-      (end-of-line nil)
-      (comment-dwim nil)
-      (back-to-indentation)
-      (next-line 1))))
+  (interactive "*P")
+  (cond (mark-active (comment-dwim arg))
+        ((= (line-beginning-position) (line-end-position)) (next-line 1))
+        (t (back-to-indentation)
+           (set-mark-command nil)
+           (end-of-line nil)
+           (comment-dwim arg)
+           (back-to-indentation)
+           (next-line 1))))
 
 (defun condense-blank-lines ()
   (interactive)
