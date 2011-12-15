@@ -21,7 +21,7 @@ to test the approximate color values for accuracy."
   :type 'boolean
   :group 'solarized)
 
-(defcustom solarized-italic t
+(defcustom solarized-italic nil
   "Stops Solarized from displaying italics when nil."
   :type 'boolean
   :group 'solarized)
@@ -103,21 +103,21 @@ will use the 256 degraded color mode."
          (linum ((t (:foreground ,base01 :background ,base02))))
          (header-line ((t (:foreground ,base0 :background ,base2))))
          (highlight ((t (:background ,base02))))
-         (hl-line ((t (:background ,base02))))
+         ;; (hl-line ((t (:background ,base02))))
          (isearch ((t (:foreground ,yellow :inverse-video t))))
          (lazy-highlight ((t (:background ,base2 :foreground ,base00))))
          (link ((t (:foreground ,violet :underline ,underline))))
          (link-visited ((t (:foreground ,magenta :underline ,underline))))
          (menu ((t (:foreground ,base0 :background ,base02))))
          (minibuffer-prompt ((t (:foreground ,blue))))
-         (mode-line
-          ((t (:foreground ,base1 :background ,base02
-                           :box (:line-width 1 :color ,base1)))))
-         (mode-line-buffer-id ((t (:foreground ,base1))))
-         (mode-line-inactive
-          ((t (:foreground ,base0  :background ,base02
-                           :box (:line-width 1 :color ,base02)))))
-         (region ((t (:background ,base01))))
+         ;; (mode-line
+         ;;  ((t (:foreground ,base1 :background ,base02
+         ;;                   :box (:line-width 1 :color ,base1)))))
+         ;; (mode-line-buffer-id ((t (:foreground ,base1))))
+         ;; (mode-line-inactive
+         ;;  ((t (:foreground ,base0  :background ,base02
+         ;;                   :box (:line-width 1 :color ,base02)))))
+         (region ((t (:background ,base02))))
          (secondary-selection ((t (:background ,base02))))
          (trailing-whitespace ((t (:foreground ,red :inverse-video t))))
          (vertical-border ((t (:foreground ,base0))))
