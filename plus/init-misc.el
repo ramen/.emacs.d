@@ -5,6 +5,8 @@
 (delete-selection-mode 1)
 (winner-mode 1)
 
+(setenv "PAGER" "cat")
+
 (mapc (lambda (cmd) (put cmd 'disabled nil))
       '(downcase-region
         upcase-region
