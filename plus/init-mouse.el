@@ -2,7 +2,7 @@
 
 ;; Make mouse wheel scroll one line at a time.
 (setq mouse-wheel-progressive-speed nil
-      mouse-wheel-scroll-amount '(1))
+      mouse-wheel-scroll-amount '(2))
 
 ;; ctrl-wheel to zoom font size
 (if (eq window-system 'w32)
