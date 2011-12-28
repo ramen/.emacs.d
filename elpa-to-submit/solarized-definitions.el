@@ -260,8 +260,8 @@ will use the 256 degraded color mode."
          (gnus-summary-normal-ticked ((t (:foreground ,base3))))
          (gnus-summary-normal-undownloaded ((t (:foreground ,base2))))
          ;; Flymake
-         (flymake-errline ((t (:background ,orange))))
-         (flymake-warnline ((t (:background ,violet))))
+         ;; (flymake-errline ((t (:background ,orange))))
+         ;; (flymake-warnline ((t (:background ,violet))))
          ;; whitespace
          (whitespace-empty ((t (:foreground ,red))))
          (whitespace-hspace ((t (:foreground ,orange))))
