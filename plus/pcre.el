@@ -1,7 +1,8 @@
 ;;; pcre.el --- Use Perl-compatible regular expressions
 
 (setq grep-command "grep -nHP -e "
-      grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;")
+      grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
+      grep-template "grep <C> -nHP -e <R> <F>")
 
 (defun grep-occur (regexp &optional nlines)
   (interactive (occur-read-primary-args))
