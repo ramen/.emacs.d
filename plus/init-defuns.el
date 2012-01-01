@@ -80,6 +80,19 @@ good destination for the assignment and yank."
   (delete-other-windows)
   (turn-off-follow-mode))
 
+(defun grep-occur (regexp &optional nlines)
+  "Show all lines in the current file containing a match for regexp using grep."
+  (interactive (occur-read-primary-args))
+  (save-some-buffers)
+  (grep (concat grep-command
+                (shell-quote-argument regexp)
+                (if nlines
+                    (if (> nlines 0)
+                        (format " -C %d " nlines)
+                      (format " -B %d " (abs nlines)))
+                  " ")
+                (buffer-file-name))))
+
 (defun indent-current-region-by (num-spaces)
   "Indent the current region by a certain number of spaces."
   (indent-rigidly (region-beginning) (region-end) num-spaces))

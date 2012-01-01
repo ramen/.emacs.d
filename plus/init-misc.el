@@ -15,6 +15,9 @@
         scroll-left))
 
 (setq auto-save-default nil
+      grep-command "grep -nHP -e "
+      grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
+      grep-template "grep <C> -nHP -e <R> <F>"
       initial-scratch-message nil
       line-move-visual nil
       mark-even-if-inactive t
