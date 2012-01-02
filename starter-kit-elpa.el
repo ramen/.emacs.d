@@ -11,6 +11,7 @@
                                    'yaml-mode
                                    'tuareg
                                    'find-file-in-project
+                                   'smex
                                    'magit
                                    'gist)
   "Libraries that should be installed by default.")
