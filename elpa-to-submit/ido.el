@@ -1553,7 +1553,7 @@ This function also adds a hook to the minibuffer."
 	(setq ido-minor-mode-map-entry (cons 'ido-mode map))
 	(add-to-list 'minor-mode-map-alist ido-minor-mode-map-entry))))
 
-  (when (called-interactively-p 'any)
+  (when (called-interactively-p)
     (message "Ido mode %s" (if ido-mode "enabled" "disabled"))))
 
 
