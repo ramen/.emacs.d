@@ -87,6 +87,7 @@ exec-to-string command, but it works and seems fast"
 (eval-after-load 'ruby-mode
   '(progn
      (require 'flymake)
+     (require 'flymake-cursor)
      (push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
      (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
      (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3)

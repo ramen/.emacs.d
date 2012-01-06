@@ -5,6 +5,7 @@
 (require 'cl)
 
 (defvar starter-kit-packages (list 'idle-highlight-mode
+                                   'flymake-cursor
                                    'ruby-mode
                                    'inf-ruby
                                    'css-mode
