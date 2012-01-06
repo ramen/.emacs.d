@@ -59,6 +59,7 @@
 (global-set-key (kbd "<end>") 'move-end-of-line)
 (global-set-key (kbd "C-M-SPC") 'mark-line)
 (global-set-key (kbd "C-M-k") 'kill-whole-line)
+(global-set-key (kbd "C-`") 'flymake-goto-next-error)
 (global-set-key (kbd "M-#") 'comment-line)
 (global-set-key (kbd "M-+") 'duplicate-line)
 (global-set-key (kbd "M-`") 'next-error)
