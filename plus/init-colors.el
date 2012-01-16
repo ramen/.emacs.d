@@ -17,6 +17,8 @@
 
 (add-hook 'magit-mode-hook
           (lambda ()
+            (set-face-attribute 'magit-branch nil :inherit nil)
+            (set-face-attribute 'magit-section-title nil :inherit nil)
             (set-face-background 'magit-item-highlight "gray10")))
 
 (add-hook 'speedbar-mode-hook
