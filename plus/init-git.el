@@ -19,9 +19,6 @@
             (define-key magit-mode-map (kbd "C-3") 'magit-show-level-3-all)
             (define-key magit-mode-map (kbd "C-4") 'magit-show-level-4-all)))
 
-(eval-after-load 'magit
-  '(magit-key-mode-insert-switch 'pushing "-u" "Set upstream" "-u"))
-
 (defun magit-ido-completing-read (prompt choices &optional predicate require-match initial-input hist def)
   "ido-based completing-read almost-replacement."
   (require 'ido)
