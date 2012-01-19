@@ -32,3 +32,4 @@
       selected)))
 
 (setq magit-completing-read-function 'magit-ido-completing-read)
+(setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
