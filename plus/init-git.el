@@ -33,3 +33,6 @@
 
 (setq magit-completing-read-function 'magit-ido-completing-read)
 (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
+
+(defadvice magit-diff (after magit-diff-advice activate)
+  (pop-to-buffer "*magit-diff*"))
