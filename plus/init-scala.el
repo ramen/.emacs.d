@@ -12,7 +12,7 @@
                 (setq last-command nil)
                 (newline-and-indent)))
             (set (make-local-variable 'compile-command)
-                 (format "cd %s && sbt compile"
+                 (format "cd %s && sbt test"
                          (locate-dominating-file default-directory "project")))))
 
 (defun scala-goto-block-start (block-start)
