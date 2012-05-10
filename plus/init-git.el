@@ -5,8 +5,17 @@
 
 (setq git-blame-prefix-format "%h %20.20a ")
 
-(defalias 'git-blame 'git-blame-mode)
 (defalias 'vc-blame 'vc-annotate)
+
+(defun git-blame ()
+  (interactive)
+  (if git-blame-mode
+      (progn
+        (git-blame-mode-off)
+        (toggle-truncate-lines 0))
+    (progn
+      (git-blame-mode-on)
+      (toggle-truncate-lines 1))))
 
 (add-hook 'magit-mode-hook
           (lambda ()
