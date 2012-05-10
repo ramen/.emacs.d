@@ -5,6 +5,7 @@
 (add-hook 'tpl-mode-hook
           (lambda ()
             (run-coding-hook)
+            (setq comment-start-skip "\\(\\(^\\|[^\\\\\n]\\)\\(\\\\\\\\\\)*\\);+ *")
             (zencoding-mode)))
 
 (define-key tpl-mode-map (kbd "C-c /") 'sgml-close-tag)
