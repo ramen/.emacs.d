@@ -21,4 +21,6 @@
 (setq dired-recursive-copies 'top)
 (setq dired-recursive-deletes 'top)
 
+(setq find-ls-option '("-exec ls -ld {} \\;" . "-ld"))
+
 (defalias 'fndired 'find-name-dired)
