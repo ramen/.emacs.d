@@ -17,6 +17,9 @@
       (git-blame-mode-on)
       (toggle-truncate-lines 1))))
 
+(eval-after-load 'magit-key-mode
+  '(magit-key-mode-insert-switch 'pulling "-v" "Verbose" "-v"))
+
 (add-hook 'magit-mode-hook
           (lambda ()
             (define-key magit-mode-map (kbd "M-1") 'digit-argument)
