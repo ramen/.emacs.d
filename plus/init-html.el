@@ -4,6 +4,8 @@
           (lambda ()
             (run-coding-hook)
             (local-set-key (kbd "RET") nil)
+            (setq paragraph-start "\f\\|[ \t]*$"
+                  paragraph-separate "[ \t\f]*$")
             (zencoding-mode)))
 
 (eval-after-load 'sgml-mode
