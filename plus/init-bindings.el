@@ -47,6 +47,8 @@
 (global-set-key (kbd "C-x <C-right>") 'bs-cycle-next)
 (global-set-key (kbd "<M-s-left>") 'bs-cycle-previous)
 (global-set-key (kbd "<M-s-right>") 'bs-cycle-next)
+(global-set-key (kbd "s-{") 'bs-cycle-previous)
+(global-set-key (kbd "s-}") 'bs-cycle-next)
 
 ;; Easier bindings for winner-mode
 (global-set-key (kbd "C-c <C-left>") 'winner-undo)
