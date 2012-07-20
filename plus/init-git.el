@@ -18,7 +18,12 @@
       (toggle-truncate-lines 1))))
 
 (eval-after-load 'magit-key-mode
-  '(magit-key-mode-insert-switch 'pulling "-v" "Verbose" "-v"))
+  '(progn
+     (dolist (switch (cdr (assoc 'switches (magit-key-mode-options-for-group 'logging))))
+       (if (equal (caddr switch) "--name-only")
+           (setcar switch "-no")))
+     (magit-key-mode-insert-switch 'logging "-nm" "No merges" "--no-merges")
+     (magit-key-mode-insert-switch 'pulling "-v" "Verbose" "-v")))
 
 (add-hook 'magit-mode-hook
           (lambda ()
