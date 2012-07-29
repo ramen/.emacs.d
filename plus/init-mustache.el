@@ -6,6 +6,7 @@
           (lambda ()
             (run-coding-hook)
             (setq comment-start-skip "\\(\\(^\\|[^\\\\\n]\\)\\(\\\\\\\\\\)*\\);+ *")
+            (turn-off-auto-fill)
             (zencoding-mode)))
 
 (define-key mustache-mode-map (kbd "C-c /") 'sgml-close-tag)
