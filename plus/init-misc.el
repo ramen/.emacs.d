@@ -24,6 +24,7 @@
       mode-line-in-non-selected-windows nil
       parens-require-spaces nil
       ring-bell-function 'ignore
+      scroll-error-top-bottom t
       scroll-preserve-screen-position t
       sentence-end-double-space nil
       split-width-threshold nil
