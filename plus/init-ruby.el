@@ -5,7 +5,9 @@
             (setq ruby-insert-encoding-magic-comment nil)
             (set (make-local-variable 'compile-command)
                  (format "cd %s && bundle exec rake"
-                         (locate-dominating-file default-directory "Rakefile")))))
+                         (locate-dominating-file default-directory "Rakefile")))
+            (cond ((fboundp 'subword-mode) (subword-mode 1))
+                  ((fboundp 'c-subword-mode) (c-subword-mode 1)))))
 
 (add-hook 'inf-ruby-mode-hook
           (lambda ()
