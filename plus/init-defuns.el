@@ -112,6 +112,12 @@ good destination for the assignment and yank."
   (interactive)
   (indent-current-region-by (- tab-width)))
 
+(defun enlarge-largest-window-horizontally (delta)
+  "Like enlarge-window, but apply to the largest window."
+  (interactive "p")
+  (with-selected-window (get-largest-window)
+    (enlarge-window delta t)))
+
 (defun insert-curlies ()
   "Insert an opening curly brace at the end of the current line, a closing
 curly brace on a new line, and position the point on a new, indented line in
@@ -214,6 +220,12 @@ default length of 8 characters."
   "Scroll up by a single line."
   (interactive)
   (scroll-up 1))
+
+(defun shrink-largest-window-horizontally (delta)
+  "Like shrink-window, but apply to the largest window."
+  (interactive "p")
+  (with-selected-window (get-largest-window)
+    (shrink-window delta t)))
 
 (defun split-window-dwim ()
   "Split window horizontally or vertically depending on space."

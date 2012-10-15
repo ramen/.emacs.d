@@ -47,10 +47,10 @@
 (global-set-key (kbd "s-C") 'delete-window-and-balance)
 (global-set-key (kbd "s-J") 'rotate-windows)
 (global-set-key (kbd "s-K") 'rotate-windows-reverse)
-(global-set-key (kbd "s-h") 'shrink-window-horizontally)
+(global-set-key (kbd "s-h") 'shrink-largest-window-horizontally)
 (global-set-key (kbd "s-j") 'other-window)
 (global-set-key (kbd "s-k") 'other-window-reverse)
-(global-set-key (kbd "s-l") 'enlarge-window-horizontally)
+(global-set-key (kbd "s-l") 'enlarge-largest-window-horizontally)
 
 ;; Buffer switching using bs-show
 (global-set-key (kbd "C-x C-b") 'bs-show)
