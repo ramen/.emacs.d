@@ -42,13 +42,14 @@
 (global-set-key (kbd "<M-f12>") 'start-or-end-kbd-macro)
 
 ;; Tiling windows
-(global-set-key (kbd "<s-return>") 'swap-with-largest-window)
 (global-set-key (kbd "<S-s-return>") 'split-window-dwim)
+(global-set-key (kbd "<s-return>") 'swap-with-largest-window)
+(global-set-key (kbd "s-C") 'delete-window-and-balance)
+(global-set-key (kbd "s-J") 'rotate-windows)
+(global-set-key (kbd "s-K") 'rotate-windows-reverse)
 (global-set-key (kbd "s-h") 'shrink-window-horizontally)
 (global-set-key (kbd "s-j") 'other-window)
-(global-set-key (kbd "s-J") 'rotate-windows)
 (global-set-key (kbd "s-k") 'other-window-reverse)
-(global-set-key (kbd "s-K") 'rotate-windows-reverse)
 (global-set-key (kbd "s-l") 'enlarge-window-horizontally)
 
 ;; Buffer switching using bs-show

@@ -39,6 +39,11 @@
      (skip-chars-forward " \t")
      (point))))
 
+(defun delete-window-and-balance ()
+  (interactive)
+  (delete-window)
+  (balance-windows))
+
 (defun dired-vc-log ()
   "Show a change log for the current file in a dired buffer."
   (interactive)
@@ -217,7 +222,8 @@ default length of 8 characters."
     (let ((new-window (if (window-splittable-p current-window t)
                           (split-window-right)
                         (split-window-below))))
-      (select-window new-window))))
+      (select-window new-window)
+      (balance-windows))))
 
 (defun start-or-end-kbd-macro ()
   "Start defining a keyboard macro, or stop if we're already defining."
