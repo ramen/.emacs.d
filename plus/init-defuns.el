@@ -181,16 +181,24 @@ default length of 8 characters."
   (other-window 1)
   (shell))
 
-(defun rotate-windows ()
+(defun other-window-reverse (count)
+  (interactive "p")
+  (other-window (- count)))
+
+(defun rotate-windows (count)
   "Swap or rotate windows with their neighbors."
-  (interactive)
+  (interactive "p")
   (let ((this-buffer (buffer-name)))
-    (other-window 1)
+    (other-window count)
     (let ((that-buffer (buffer-name)))
       (switch-to-buffer this-buffer)
-      (other-window -1)
+      (other-window (- count))
       (switch-to-buffer that-buffer)
-      (other-window 1))))
+      (other-window count))))
+
+(defun rotate-windows-reverse (count)
+  (interactive "p")
+  (rotate-windows (- count)))
 
 (defun scroll-down-1 ()
   "Scroll down by a single line."
@@ -202,12 +210,31 @@ default length of 8 characters."
   (interactive)
   (scroll-up 1))
 
+(defun split-window-dwim ()
+  "Split window horizontally or vertically depending on space."
+  (interactive)
+  (let ((current-window (selected-window)))
+    (let ((new-window (if (window-splittable-p current-window t)
+                          (split-window-right)
+                        (split-window-below))))
+      (select-window new-window))))
+
 (defun start-or-end-kbd-macro ()
   "Start defining a keyboard macro, or stop if we're already defining."
   (interactive)
   (if defining-kbd-macro
       (end-kbd-macro)
     (start-kbd-macro nil)))
+
+(defun swap-with-largest-window ()
+  "Switch the buffer in the current window with that of the largest window."
+  (interactive)
+  (let ((current-window (selected-window))
+        (current-buffer (window-buffer))
+        (largest-window (get-largest-window)))
+    (set-window-buffer current-window (window-buffer largest-window))
+    (set-window-buffer largest-window current-buffer)
+    (select-window largest-window)))
 
 (defun textile-table (start end)
   "Convert a region of tab-delimited text to a textile-formatted table."

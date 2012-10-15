@@ -27,7 +27,6 @@
       scroll-error-top-bottom t
       scroll-preserve-screen-position t
       sentence-end-double-space nil
-      split-width-threshold nil
       tramp-default-method "sshx"
       uniquify-buffer-name-style 'post-forward-angle-brackets
       which-func-modes t)
