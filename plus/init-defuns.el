@@ -112,10 +112,10 @@ good destination for the assignment and yank."
   (interactive)
   (indent-current-region-by (- tab-width)))
 
-(defun enlarge-largest-window-horizontally (delta)
-  "Like enlarge-window, but apply to the largest window."
+(defun enlarge-first-window-horizontally (delta)
+  "Like enlarge-window, but apply to the first window."
   (interactive "p")
-  (with-selected-window (get-largest-window)
+  (with-selected-window (frame-first-window)
     (enlarge-window delta t)))
 
 (defun insert-curlies ()
@@ -221,10 +221,10 @@ default length of 8 characters."
   (interactive)
   (scroll-up 1))
 
-(defun shrink-largest-window-horizontally (delta)
-  "Like shrink-window, but apply to the largest window."
+(defun shrink-first-window-horizontally (delta)
+  "Like shrink-window, but apply to the first window."
   (interactive "p")
-  (with-selected-window (get-largest-window)
+  (with-selected-window (frame-first-window)
     (shrink-window delta t)))
 
 (defun split-window-dwim ()
