@@ -42,7 +42,7 @@
 (defun delete-window-and-balance ()
   (interactive)
   (delete-window)
-  (balance-windows))
+  (when (window-combined-p) (balance-windows (window-parent))))
 
 (defun dired-vc-log ()
   "Show a change log for the current file in a dired buffer."
@@ -235,7 +235,7 @@ default length of 8 characters."
                           (split-window-right)
                         (split-window-below))))
       (select-window new-window)
-      (balance-windows))))
+      (when (window-combined-p) (balance-windows (window-parent))))))
 
 (defun start-or-end-kbd-macro ()
   "Start defining a keyboard macro, or stop if we're already defining."
