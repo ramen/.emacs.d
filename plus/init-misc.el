@@ -29,6 +29,7 @@
       sentence-end-double-space nil
       tramp-default-method "sshx"
       uniquify-buffer-name-style 'post-forward-angle-brackets
-      which-func-modes t)
+      which-func-modes t
+      window-combination-resize t)
 
 (setq-default fill-column 78)
