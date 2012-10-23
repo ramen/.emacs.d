@@ -232,14 +232,10 @@ default length of 8 characters."
 (defun split-window-dwim ()
   "Split window horizontally or vertically depending on space."
   (interactive)
-  (let ((current-window (selected-window)))
-    (let ((new-window (if (window-splittable-p current-window t)
-                          (split-window-horizontally)
-                        (split-window-vertically))))
-      (select-window new-window)
-      (if (fboundp 'window-combined-p)
-          (when (window-combined-p) (balance-windows (window-parent)))
-        (balance-windows)))))
+  (select-window (if (window-splittable-p (selected-window) t)
+                     (split-window-horizontally)
+                   (split-window-vertically)))
+  (balance-windows (and (fboundp 'window-parent) (window-parent))))
 
 (defun start-or-end-kbd-macro ()
   "Start defining a keyboard macro, or stop if we're already defining."
