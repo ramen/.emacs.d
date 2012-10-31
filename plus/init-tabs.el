@@ -15,7 +15,7 @@
   (dolist (var '(c-basic-offset
                  css-indent-offset css-indent-level
                  espresso-indent-level javascript-indent-level
-                 python-indent
+                 python-indent py-indent-offset rust-indent-unit
                  sgml-basic-offset zencoding-indentation
                  standard-indent tab-width))
     (set var width)))
