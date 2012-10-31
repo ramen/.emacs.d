@@ -187,6 +187,16 @@ default length of 8 characters."
     (yank))
   (setq deactivate-mark nil))
 
+(defun new-eshell ()
+  "Open a new eshell even if one already exists."
+  (interactive)
+  (eshell t))
+
+(defun new-shell ()
+  "Open a new shell even if one already exists."
+  (interactive)
+  (shell (generate-new-buffer-name "*shell*")))
+
 (defun open-shell-pane ()
   "Open a small shell window at the bottom of the frame."
   (interactive)

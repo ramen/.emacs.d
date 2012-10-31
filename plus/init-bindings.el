@@ -105,7 +105,13 @@
 ;; C-z should be a NOOP. -God
 (global-set-key (kbd "C-z") 'ignore)
 
-;; Revert swapped bindings from emacs-starter-kit
+;; Swap shell bindings from emacs-starter-kit
+(global-set-key (kbd "C-x m") 'shell)
+(global-set-key (kbd "C-x M") 'new-shell)
+(global-set-key (kbd "C-x M-m") 'eshell)
+(global-set-key (kbd "C-x M-M") 'new-eshell)
+
+;; Revert swapped isearch bindings from emacs-starter-kit
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward)
