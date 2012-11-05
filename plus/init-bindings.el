@@ -51,6 +51,7 @@
 (global-set-key (kbd "s-]") 'enlarge-first-window-horizontally)
 (global-set-key (kbd "s-j") 'other-window)
 (global-set-key (kbd "s-k") 'other-window-reverse)
+(global-set-key (kbd "s-m") 'toggle-maximized)
 
 ;; Buffer switching using bs-show
 (global-set-key (kbd "C-x C-b") 'bs-show)

@@ -269,6 +269,14 @@ default length of 8 characters."
   (interactive "r")
   (replace-regexp "^\\|$\\|	" "|" nil start end))
 
+(defun toggle-maximized ()
+  (interactive)
+  (cond ((window-parent)
+         (setq unmaximized-window-configuration (current-window-configuration))
+         (delete-other-windows))
+        ((boundp 'unmaximized-window-configuration)
+         (set-window-configuration unmaximized-window-configuration))))
+
 (defun toggle-show-trailing-whitespace ()
   "Toggles the highlighting of trailing whitespace."
   (interactive)
