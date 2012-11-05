@@ -1,6 +1,6 @@
 ;;; init-scala.el --- Scala mode configuration
 
-(require 'sbt)
+(require 'scala-mode-auto)
 
 (add-hook 'scala-mode-hook
           (lambda ()
@@ -14,22 +14,3 @@
             (set (make-local-variable 'compile-command)
                  (format "cd %s && sbt test"
                          (locate-dominating-file default-directory "project")))))
-
-(defun scala-goto-block-start (block-start)
-  (real-goto-char block-start)
-  (end-of-line)
-  (if (scala-looking-at-backward scala-expr-start-re)
-      (real-goto-char (+ (current-indentation) scala-mode-indent:step 1))
-    (real-goto-char block-start)))
-
-(defadvice scala-indentation-from-following (around scala-indentation-fix-1 activate)
-  "Fix broken indentation within blocks"
-  (flet ((real-goto-char (position) (goto-char position))
-         (goto-char (position) (scala-goto-block-start position)))
-    ad-do-it))
-
-(defadvice scala-indentation-from-block (around scala-indentation-fix-2 activate)
-  "Fix broken indentation within blocks"
-  (flet ((real-goto-char (position) (goto-char position))
-         (goto-char (position) (scala-goto-block-start position)))
-    ad-do-it))
