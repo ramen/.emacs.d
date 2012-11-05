@@ -60,6 +60,8 @@
   "Clone the current line without changing the column position."
   (interactive)
   (let ((col (current-column)))
+    (end-of-line 1)
+    (if (eobp) (open-line 1))
     (beginning-of-line 1)
     (kill-new "")
     (kill-line 1)
