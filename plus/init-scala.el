@@ -11,6 +11,7 @@
               (lambda () (interactive)
                 (setq last-command nil)
                 (newline-and-indent)))
+            (define-key scala-mode-map (kbd "C-c C-s") 'scala-run-scala)
             (set (make-local-variable 'compile-command)
                  (format "cd %s && sbt test"
                          (locate-dominating-file default-directory "project")))))
