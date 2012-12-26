@@ -5,6 +5,8 @@
             (define-key dired-mode-map "." 'dired-up-directory)
             (define-key dired-mode-map "e" 'wdired-change-to-wdired-mode)
             (define-key dired-mode-map "l" 'dired-vc-log)
+            (define-key dired-mode-map "o" 'dired-display-file)
+            (define-key dired-mode-map "\C-o" 'dired-find-file-other-window)
             (setq truncate-lines t)))
 
 (add-hook 'grep-mode-hook
