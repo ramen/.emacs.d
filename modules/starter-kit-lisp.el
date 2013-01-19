@@ -44,7 +44,7 @@
 (progn
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
-  (add-hook 'emacs-lisp-mode-hook 'esk-prog-mode-hook)
+  ;; (add-hook 'emacs-lisp-mode-hook 'esk-prog-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
   (defun esk-remove-elc-on-save ()
