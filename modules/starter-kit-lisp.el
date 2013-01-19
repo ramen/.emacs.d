@@ -1,74 +1,97 @@
-;;; starter-kit-lisp.el --- Some helpful Lisp code
+;;; starter-kit-lisp.el --- Saner defaults and goodies for lisp languages
 ;;
-;; Part of the Emacs Starter Kit
+;; Copyright (c) 2008-2011 Phil Hagelberg and contributors
+;;
+;; Author: Phil Hagelberg <technomancy@gmail.com>
+;; URL: http://www.emacswiki.org/cgi-bin/wiki/StarterKit
+;; Version: 2.0.3
+;; Keywords: convenience
+;; Package-Requires: ((starter-kit "2.0.2") (elisp-slime-nav "0.1"))
 
-(define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
-(define-key lisp-mode-shared-map (kbd "C-c l") "lambda")
-(define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
-(define-key lisp-mode-shared-map (kbd "C-\\") 'lisp-complete-symbol)
-(define-key lisp-mode-shared-map (kbd "C-c v") 'eval-buffer)
+;; This file is not part of GNU Emacs.
 
-(defface esk-paren-face
-   '((((class color) (background dark))
-      (:foreground "grey50"))
-     (((class color) (background light))
-      (:foreground "grey55")))
-   "Face used to dim parentheses."
-   :group 'starter-kit-faces)
+;;; Commentary:
 
-;;; Emacs Lisp
+;; "Emacs outshines all other editing software in approximately the
+;; same way that the noonday sun does the stars. It is not just bigger
+;; and brighter; it simply makes everything else vanish."
+;; -Neal Stephenson, "In the Beginning was the Command Line"
 
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
+;; This file contains tweaks specific to Lisp languages.
 
-(defun esk-remove-elc-on-save ()
-  "If you're saving an elisp file, likely the .elc is no longer valid."
-  (make-local-variable 'after-save-hook)
-  (add-hook 'after-save-hook
-            (lambda ()
-              (if (file-exists-p (concat buffer-file-name "c"))
-                  (delete-file (concat buffer-file-name "c"))))))
+;;; License:
 
-(define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License
+;; as published by the Free Software Foundation; either version 3
+;; of the License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
 
-;;; Clojure
+;;; Code:
 
-(eval-after-load 'find-file-in-project
-  '(add-to-list 'ffip-patterns "*.clj"))
+;; Emacs Lisp
 
-(defun clojure-project ()
-  (interactive)
-  (message "Deprecated in favour of M-x swank-clojure-project. Install swank-clojure from ELPA."))
+;;;###autoload
+(progn
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
+  (add-hook 'emacs-lisp-mode-hook 'esk-prog-mode-hook)
+  (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
+
+  (defun esk-remove-elc-on-save ()
+    "If you're saving an elisp file, likely the .elc is no longer valid."
+    (make-local-variable 'after-save-hook)
+    (add-hook 'after-save-hook
+              (lambda ()
+                (if (file-exists-p (concat buffer-file-name "c"))
+                    (delete-file (concat buffer-file-name "c"))))))
+
+  (define-key emacs-lisp-mode-map (kbd "C-c v") 'eval-buffer)
 
 ;;; Enhance Lisp Modes
 
-(eval-after-load 'paredit
-  ;; need a binding that works in the terminal
-  '(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp))
+  (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
+  (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
 
-(dolist (x '(scheme emacs-lisp lisp clojure))
-  (font-lock-add-keywords
-   (intern (concat (symbol-name x) "-mode"))
-   '(("(\\|)" . 'esk-paren-face)))
-  (add-hook
-   (intern (concat (symbol-name x) "-mode-hook")) 'turn-on-paredit)
-  (add-hook
-   (intern (concat (symbol-name x) "-mode-hook")) 'run-coding-hook))
+  ;; TODO: look into parenface package
+  (defface esk-paren-face
+    '((((class color) (background dark))
+       (:foreground "grey50"))
+      (((class color) (background light))
+       (:foreground "grey55")))
+    "Face used to dim parentheses."
+    :group 'starter-kit-faces)
 
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("(\\(fn\\>\\)"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "ƒ")
-                               nil))))))
+  (eval-after-load 'paredit
+    ;; need a binding that works in the terminal
+    '(progn
+       (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
+       (define-key paredit-mode-map (kbd "M-(") 'paredit-backward-slurp-sexp)))
 
-(eval-after-load 'slime
-  '(define-key slime-mode-map (kbd "C-c p")
-     'slime-pprint-eval-last-expression))
+  (dolist (mode '(scheme emacs-lisp lisp clojure clojurescript))
+    (when (> (display-color-cells) 8)
+      (font-lock-add-keywords (intern (concat (symbol-name mode) "-mode"))
+                              '(("(\\|)" . 'esk-paren-face))))
+    (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
+              'paredit-mode))
 
-(eval-after-load 'slime-repl
-  '(define-key slime-repl-mode-map (kbd "C-c p")
-     'slime-pprint-eval-last-expression))
+  (defun esk-pretty-fn ()
+    (font-lock-add-keywords nil `(("(\\(\\<fn\\>\\)"
+                                   (0 (progn (compose-region (match-beginning 1)
+                                                             (match-end 1)
+                                                             "\u0192"
+                                                             'decompose-region)))))))
+  (add-hook 'clojure-mode-hook 'esk-pretty-fn)
+  (add-hook 'clojurescript-mode-hook 'esk-pretty-fn))
 
 (provide 'starter-kit-lisp)
-;; starter-kit-lisp.el ends here
+;;; starter-kit-lisp.el ends here
