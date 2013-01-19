@@ -50,7 +50,7 @@
   (global-set-key (kbd "M-/") 'hippie-expand)
 
   ;; Perform general cleanup.
-  (global-set-key (kbd "C-c n") 'esk-cleanup-buffer)
+  (global-set-key (kbd "C-c n") 'cleanup-buffer)
 
   ;; Turn on the menu bar for exploring new modes
   (global-set-key (kbd "C-<f10>") 'menu-bar-mode)
@@ -96,7 +96,7 @@
   (define-key 'help-command "a" 'apropos)
 
   ;; Should be able to eval-and-replace anywhere.
-  (global-set-key (kbd "C-c e") 'esk-eval-and-replace)
+  (global-set-key (kbd "C-c e") 'eval-and-replace)
 
   ;; M-S-6 is awkward
   (global-set-key (kbd "C-c q") 'join-line)
