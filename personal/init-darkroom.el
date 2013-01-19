@@ -3,4 +3,4 @@
 (require 'darkroom-mode)
 
 (setq w32-fullscreen-toggletitle-cmd
-      (concat dotfiles-dir "/elpa-to-submit/w32toggletitle.exe"))
+      (concat dotfiles-dir "/vendor/w32toggletitle.exe"))
