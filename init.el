@@ -58,7 +58,6 @@
 (require 'starter-kit-defuns)
 (require 'starter-kit-bindings)
 (require 'starter-kit-misc)
-(require 'starter-kit-registers)
 (require 'starter-kit-eshell)
 (require 'starter-kit-lisp)
 (require 'starter-kit-perl)
