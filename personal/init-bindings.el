@@ -116,10 +116,12 @@
 (global-set-key (kbd "C-x M-M") 'new-eshell)
 
 ;; Revert swapped isearch bindings from emacs-starter-kit
+(global-set-key (kbd "C-M-%") 'query-replace-regexp)
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward)
 (global-set-key (kbd "C-s") 'isearch-forward)
+(global-set-key (kbd "M-%") 'query-replace)
 
 ;; Revert clobbered mule bindings from emacs-starter-kit
 (define-key ctl-x-map (kbd "RET") mule-keymap)
