@@ -24,6 +24,7 @@
 
 (add-to-list 'load-path dotfiles-dir)
 
+(add-to-list 'load-path (concat dotfiles-dir "/core"))
 (add-to-list 'load-path (concat dotfiles-dir "/modules"))
 (add-to-list 'load-path (concat dotfiles-dir "/vendor"))
 
