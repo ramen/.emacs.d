@@ -2,6 +2,7 @@
 
 (add-hook 'ruby-mode-hook
           (lambda ()
+            (run-coding-hook)
             (setq ruby-insert-encoding-magic-comment nil)
             (set (make-local-variable 'compile-command)
                  (format "cd %s && bundle exec rake"
