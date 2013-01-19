@@ -294,10 +294,6 @@ default length of 8 characters."
       (setq last-major-mode major-mode)
       (text-mode))))
 
-;; I don't care for paredit-mode, which emacs-starter-kit enables for
-;; lisp-mode by default. Redefining this function disables it.
-(defun turn-on-paredit ())
-
 ;; I don't like idle-highlight-mode either.
 (remove-hook 'coding-hook 'turn-on-idle-highlight)
 
