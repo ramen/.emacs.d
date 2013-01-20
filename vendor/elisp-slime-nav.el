@@ -36,7 +36,7 @@
 
 (eval-when-compile (require 'cl))
 (require 'etags)
-
+(require 'help-mode)
 
 (defun elisp-slime-nav--all-navigable-symbol-names ()
   "Return a list of strings for the symbols to which navigation is possible."
