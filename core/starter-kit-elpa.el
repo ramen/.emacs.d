@@ -6,6 +6,7 @@
 
 (defvar starter-kit-packages (list 'clojure-mode
                                    'css-mode
+                                   'expand-region
                                    'find-file-in-project
                                    'flymake-cursor
                                    'full-ack
