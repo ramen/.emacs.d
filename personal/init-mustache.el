@@ -4,7 +4,7 @@
 
 (add-hook 'mustache-mode-hook
           (lambda ()
-            (run-coding-hook)
+            (esk-prog-mode-hook)
             (setq comment-start-skip "\\(\\(^\\|[^\\\\\n]\\)\\(\\\\\\\\\\)*\\);+ *")
             (turn-off-auto-fill)
             (zencoding-mode)))

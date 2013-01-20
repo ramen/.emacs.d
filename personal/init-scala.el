@@ -4,7 +4,7 @@
 
 (add-hook 'scala-mode-hook
           (lambda ()
-            (run-coding-hook)
+            (esk-prog-mode-hook)
             (define-key scala-mode-map (kbd "<f1>") nil)
             ;; http://stackoverflow.com/questions/3614448/emacs-scala-mode-newline-and-indent-weirdness
             (define-key scala-mode-map (kbd "RET")

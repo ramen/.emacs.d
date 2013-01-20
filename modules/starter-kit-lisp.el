@@ -44,7 +44,6 @@
 (progn
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'esk-remove-elc-on-save)
-  ;; (add-hook 'emacs-lisp-mode-hook 'esk-prog-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode)
 
   (defun esk-remove-elc-on-save ()
@@ -82,7 +81,7 @@
       (font-lock-add-keywords (intern (concat (symbol-name mode) "-mode"))
                               '(("(\\|)" . 'esk-paren-face))))
     (add-hook (intern (concat (symbol-name mode) "-mode-hook"))
-              'run-coding-hook))
+              'esk-prog-mode-hook))
 
   (defun esk-pretty-fn ()
     (font-lock-add-keywords nil `(("(\\(\\<fn\\>\\)"

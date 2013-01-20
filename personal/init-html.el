@@ -2,7 +2,7 @@
 
 (add-hook 'sgml-mode-hook
           (lambda ()
-            (run-coding-hook)
+            (esk-prog-mode-hook)
             (local-set-key (kbd "RET") nil)
             (setq paragraph-start "\f\\|[ \t]*$"
                   paragraph-separate "[ \t\f]*$")

@@ -2,7 +2,7 @@
 
 (add-hook 'python-mode-hook
           (lambda ()
-            (run-coding-hook)
+            (esk-prog-mode-hook)
             (when (boundp 'python-mode-map)
               (define-key python-mode-map "\C-c\C-s" 'python-shell))
             (when (boundp 'py-mode-map)

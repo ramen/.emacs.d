@@ -210,6 +210,13 @@ default length of 8 characters."
   (interactive "p")
   (other-window (- count)))
 
+(defun recompile-init ()
+  "Byte-compile all your dotfiles again."
+  (interactive)
+  (byte-recompile-directory dotfiles-dir 0)
+  (dolist (dir '("core" "modules" "vendor" "personal"))
+    (byte-recompile-directory (concat dotfiles-dir dir) 0)))
+
 (defun rotate-windows (count)
   "Swap or rotate windows with their neighbors."
   (interactive "p")
@@ -271,6 +278,19 @@ default length of 8 characters."
   (interactive "r")
   (replace-regexp "^\\|$\\|	" "|" nil start end))
 
+(defun toggle-fullscreen ()
+  (interactive)
+  (if (eq window-system 'w32)
+      (progn
+        (require 'w32-fullscreen)
+        (w32-fullscreen))
+    ;; http://www.emacswiki.org/emacs/FullScreen
+    (let ((current-value (frame-parameter nil 'fullscreen)))
+      (set-frame-parameter nil 'fullscreen
+                           (if (equal 'fullboth current-value)
+                               (if (boundp 'old-fullscreen) old-fullscreen nil)
+                             (progn (setq old-fullscreen current-value)
+                                    'fullboth))))))
 (defun toggle-maximized ()
   (interactive)
   (cond ((window-parent)
@@ -294,11 +314,11 @@ default length of 8 characters."
       (setq last-major-mode major-mode)
       (text-mode))))
 
-;; I don't like idle-highlight-mode either.
+;; I don't like idle-highlight-mode.
 (remove-hook 'coding-hook 'turn-on-idle-highlight)
 
 ;; I use global-hl-line-mode.
-(remove-hook 'coding-hook 'turn-on-hl-line-mode)
+(remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 
 ;; Don't use auto-fill by default in text modes.
 (remove-hook 'text-mode-hook 'turn-on-auto-fill)

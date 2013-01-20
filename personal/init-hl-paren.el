@@ -1,7 +1,7 @@
 ;;; init-hl-paren.el --- Enable highlight-parentheses mode
 
 (when window-system
-  (add-hook 'coding-hook 'highlight-parentheses-mode)
+  (add-hook 'prog-mode-hook 'highlight-parentheses-mode)
 
   ;; http://stackoverflow.com/questions/2413047/ddg#2413472
   (setq hl-paren-colors

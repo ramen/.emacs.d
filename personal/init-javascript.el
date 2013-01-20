@@ -2,7 +2,7 @@
 
 (add-hook 'js2-mode-hook
           (lambda ()
-            (run-coding-hook)
+            (esk-prog-mode-hook)
             (abbrev-mode 1)
             (define-key js2-mode-map (kbd "RET") nil)))
 

@@ -4,7 +4,7 @@
 
 (add-hook 'thrift-mode-hook
           (lambda ()
-            (run-coding-hook)
+            (esk-prog-mode-hook)
             (set (make-local-variable 'compile-command)
                  (format "cd %s && sbt compile"
                          (locate-dominating-file default-directory ".git")))))

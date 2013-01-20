@@ -35,7 +35,7 @@
   (define-key key-translation-map (kbd "ESC [ 8 ^") (kbd "<C-end>"))
   (define-key key-translation-map (kbd "ESC [ 8 ~") (kbd "<end>"))
 
-  (remove-hook 'coding-hook 'pretty-lambdas)
+  (remove-hook 'prog-mode-hook 'pretty-lambdas)
 
   (require 'mouse)
   (defalias 'track-mouse 'ignore)
