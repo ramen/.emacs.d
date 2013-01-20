@@ -7,6 +7,7 @@
 (defvar starter-kit-packages (list 'css-mode
                                    'find-file-in-project
                                    'flymake-cursor
+                                   'full-ack
                                    'gist
                                    'idle-highlight-mode
                                    'ido-ubiquitous
