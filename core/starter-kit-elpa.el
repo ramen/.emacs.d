@@ -16,7 +16,8 @@
                                    'magit
                                    'ruby-mode
                                    'tuareg
-                                   'yaml-mode)
+                                   'yaml-mode
+                                   'zencoding-mode)
   "Libraries that should be installed by default.")
 
 (defun starter-kit-elpa-install ()
