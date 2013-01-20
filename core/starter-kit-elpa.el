@@ -4,16 +4,17 @@
 
 (require 'cl)
 
-(defvar starter-kit-packages (list 'idle-highlight-mode
-                                   'flymake-cursor
-                                   'ruby-mode
-                                   'inf-ruby
-                                   'css-mode
-                                   'yaml-mode
-                                   'tuareg
-                                   'find-file-in-project
-                                   'magit
-                                   'gist)
+(defvar starter-kit-packages (list 'css-mode
+				   'find-file-in-project
+				   'flymake-cursor
+				   'gist
+				   'idle-highlight-mode
+				   'ido-ubiquitous
+				   'inf-ruby
+				   'magit
+				   'ruby-mode
+				   'tuareg
+				   'yaml-mode)
   "Libraries that should be installed by default.")
 
 (defun starter-kit-elpa-install ()

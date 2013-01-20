@@ -1,6 +1,41 @@
-;;; starter-kit-misc.el --- Things that don't fit anywhere else
+;;; starter-kit-misc.el --- Saner defaults and goodies: miscellany
 ;;
-;; Part of the Emacs Starter Kit
+;; Copyright (c) 2008-2010 Phil Hagelberg and contributors
+;;
+;; Author: Phil Hagelberg <technomancy@gmail.com>
+;; URL: http://www.emacswiki.org/cgi-bin/wiki/StarterKit
+;; Version: 2.0.2
+;; Keywords: convenience
+
+;; This file is not part of GNU Emacs.
+
+;;; Commentary:
+
+;; "Emacs outshines all other editing software in approximately the
+;; same way that the noonday sun does the stars. It is not just bigger
+;; and brighter; it simply makes everything else vanish."
+;; -Neal Stephenson, "In the Beginning was the Command Line"
+
+;; This file contains setqs and things that aren't bindings or defuns.
+
+;;; License:
+
+;; This program is free software; you can redistribute it and/or
+;; modify it under the terms of the GNU General Public License
+;; as published by the Free Software Foundation; either version 3
+;; of the License, or (at your option) any later version.
+;;
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with GNU Emacs; see the file COPYING.  If not, write to the
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
+
+;;; Code:
 
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
@@ -8,118 +43,101 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
-(add-hook 'before-make-frame-hook 'turn-off-tool-bar)
-
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-(ansi-color-for-comint-mode-on)
+;; can't do it at launch or emacsclient won't always honor it
+(add-hook 'before-make-frame-hook 'esk-turn-off-tool-bar)
 
 (setq visible-bell t
-      fringe-mode (cons 4 0)
-      echo-keystrokes 0.1
-      font-lock-maximum-decoration t
       inhibit-startup-message t
-      transient-mark-mode t
       color-theme-is-global t
+      sentence-end-double-space nil
       shift-select-mode nil
       mouse-yank-at-point t
-      require-final-newline t
-      truncate-partial-width-windows nil
       uniquify-buffer-name-style 'forward
-      ffap-machine-p-known 'reject
-      whitespace-style '(trailing lines space-before-tab
-                                  face indentation space-after-tab)
-      whitespace-line-column 100
+      whitespace-style '(face trailing lines-tail tabs)
+      whitespace-line-column 80
       ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory (concat dotfiles-dir "oddmuse")
-      xterm-mouse-mode t
-      save-place-file (concat dotfiles-dir "places"))
+      oddmuse-directory (concat user-emacs-directory "oddmuse")
+      save-place-file (concat user-emacs-directory "places")
+      backup-directory-alist `(("." . ,(concat user-emacs-directory "backups")))
+      diff-switches "-u")
 
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
 ;; Set this to whatever browser you use
-(case window-system
-  (w32 (setq browse-url-browser-function 'browse-url-default-windows-browser))
-  (mac (setq browse-url-browser-function 'browse-url-default-macosx-browser))
-  (otherwise (setq browse-url-browser-function 'browse-url-generic
-                   browse-url-generic-program "sensible-browser")))
-
-;; Transparently open compressed files
-(auto-compression-mode t)
-
-;; Enable syntax highlighting for older Emacsen that have it off
-(global-font-lock-mode t)
-
-;; Save a list of recent files visited.
-(recentf-mode 1)
+;; (setq browse-url-browser-function 'browse-url-firefox)
+;; (setq browse-url-browser-function 'browse-default-macosx-browser)
+;; (setq browse-url-browser-function 'browse-default-windows-browser)
+;; (setq browse-url-browser-function 'browse-default-kde)
+;; (setq browse-url-browser-function 'browse-default-epiphany)
+;; (setq browse-url-browser-function 'browse-default-w3m)
+;; (setq browse-url-browser-function 'browse-url-generic
+;;       browse-url-generic-program "~/src/conkeror/conkeror")
 
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
 ;; ido-mode is like magic pixie dust!
-(when (> emacs-major-version 21)
-  (ido-mode t)
-  (setq ido-enable-prefix nil
-        ido-enable-flex-matching t
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point 'guess
-        ido-max-prospects 10))
+(ido-mode t)
+(ido-ubiquitous t)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-auto-merge-work-directories-length nil
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-use-virtual-buffers t
+      ido-handle-duplicate-virtual-buffers 2
+      ido-max-prospects 10)
+
+(require 'ffap)
+(defvar ffap-c-commment-regexp "^/\\*+"
+  "Matches an opening C-style comment, like \"/***\".")
+
+(defadvice ffap-file-at-point (after avoid-c-comments activate)
+  "Don't return paths like \"/******\" unless they actually exist.
+
+This fixes the bug where ido would try to suggest a C-style
+comment as a filename."
+  (ignore-errors
+    (when (and ad-return-value
+               (string-match-p ffap-c-commment-regexp
+                               ad-return-value)
+               (not (ffap-file-exists-string ad-return-value)))
+      (setq ad-return-value nil))))
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook 'turn-on-flyspell)
+;; (when (executable-find ispell-program-name) 
+;;       (add-hook 'text-mode-hook 'turn-on-flyspell))
 
-(defvar coding-hook nil
-  "Hook that gets run on activation of any programming mode.")
+(eval-after-load "ispell"
+  '(when (executable-find ispell-program-name)
+   (add-hook 'text-mode-hook 'turn-on-flyspell)))
+
+
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'auto-tail-revert-mode 'tail-mode)
+
 (random t) ;; Seed the random-number generator
 
-(defalias 'auto-revert-tail-mode 'tail-mode)
-
 ;; Hippie expand: at times perhaps too hip
-(delete 'try-expand-line hippie-expand-try-functions-list)
-(delete 'try-expand-list hippie-expand-try-functions-list)
-(delete 'try-complete-file-name-partially hippie-expand-try-functions-list)
-(delete 'try-complete-file-name hippie-expand-try-functions-list)
-
-;; Don't clutter up directories with files~
-(setq backup-directory-alist `(("." . ,(expand-file-name
-                                        (concat dotfiles-dir "backups")))))
-
-;; nxhtml stuff
-(setq mumamo-chunk-coloring 'submode-colored
-      nxhtml-skip-welcome t
-      indent-region-mode t
-      rng-nxml-auto-validate-flag nil)
-
-;; Associate modes with file extensions
-
-(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
-(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\(on\\)?$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
+(eval-after-load 'hippie-exp
+  '(progn
+     (dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+       (delete f hippie-expand-try-functions-list))
+     
+     ;; Add this back in at the end of the list.
+     (add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)))
 
 (eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
-    (add-to-list 'grep-find-ignored-files "target")
-    (add-to-list 'grep-find-ignored-files "*.class")))
-
-;; Default to unified diffs
-(setq diff-switches "-u -w")
+     (add-to-list 'grep-find-ignored-files "*.class")))
 
 ;; Cosmetics
-
-;; (set-face-background 'vertical-border "white")
-;; (set-face-foreground 'vertical-border "white")
 
 (eval-after-load 'diff-mode
   '(progn
@@ -128,27 +146,15 @@
 
 (eval-after-load 'magit
   '(progn
-     (set-face-foreground 'magit-diff-add "green3")
+     (set-face-foreground 'magit-diff-add "green4")
      (set-face-foreground 'magit-diff-del "red3")))
 
-(eval-after-load 'mumamo
-  '(eval-after-load 'zenburn
-     '(ignore-errors (set-face-background
-                      'mumamo-background-chunk-submode "gray22"))))
-
-;; Platform-specific stuff
-(when (eq system-type 'darwin)
-  ;; Work around a bug on OS X where system-name is FQDN
-  (setq system-name (car (split-string system-name "\\."))))
-
-;; make emacs use the clipboard
-(setq x-select-enable-clipboard t)
-
 ;; Get around the emacswiki spam protection
-(add-hook 'oddmuse-mode-hook
-          (lambda ()
-            (unless (string-match "question" oddmuse-post)
-              (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post)))))
+(eval-after-load 'oddmuse
+  (add-hook 'oddmuse-mode-hook
+            (lambda ()
+              (unless (string-match "question" oddmuse-post)
+                (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post))))))
 
 (provide 'starter-kit-misc)
 ;;; starter-kit-misc.el ends here
