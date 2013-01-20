@@ -81,14 +81,14 @@
 (load custom-file 'noerror)
 
 ;; You can keep system- or user-specific customizations here
-(setq personal-specific-dir (concat dotfiles-dir "personal")
+(setq personal-dir (concat dotfiles-dir "personal")
       system-specific-config (concat dotfiles-dir system-name ".el")
       user-specific-config (concat dotfiles-dir user-login-name ".el")
       user-specific-dir (concat dotfiles-dir user-login-name))
-(add-to-list 'load-path personal-specific-dir)
+(add-to-list 'load-path personal-dir)
 (add-to-list 'load-path user-specific-dir)
 
-(mapc #'load (directory-files personal-specific-dir nil ".*el$"))
+(mapc #'load (directory-files personal-dir nil ".*el$"))
 (if (file-exists-p system-specific-config) (load system-specific-config))
 (if (file-exists-p user-specific-dir)
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
