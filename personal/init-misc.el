@@ -19,7 +19,7 @@
       grep-command "grep -nHP -e "
       grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
       grep-template "grep <C> -nHP -e <R> <F>"
-      ido-ubiquitous-command-exceptions '(execute-extended-command)
+      ido-ubiquitous-command-exceptions '(describe-function describe-variable execute-extended-command)
       initial-scratch-message nil
       line-move-visual nil
       mark-even-if-inactive t
