@@ -315,7 +315,7 @@ default length of 8 characters."
       (text-mode))))
 
 ;; I don't like idle-highlight-mode.
-(remove-hook 'coding-hook 'turn-on-idle-highlight)
+(remove-hook 'prog-mode-hook 'idle-highlight-mode)
 
 ;; I use global-hl-line-mode.
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
