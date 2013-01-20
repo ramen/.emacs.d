@@ -291,6 +291,7 @@ default length of 8 characters."
                                (if (boundp 'old-fullscreen) old-fullscreen nil)
                              (progn (setq old-fullscreen current-value)
                                     'fullboth))))))
+
 (defun toggle-maximized ()
   (interactive)
   (cond ((window-parent)
