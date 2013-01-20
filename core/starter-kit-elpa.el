@@ -10,7 +10,6 @@
                                    'find-file-in-project
                                    'flymake-cursor
                                    'full-ack
-                                   'gist
                                    'idle-highlight-mode
                                    'ido-ubiquitous
                                    'inf-ruby
