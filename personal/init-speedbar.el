@@ -1,5 +1,6 @@
 ;;; init-speedbar-el --- Speedbar configuration
 
+(defalias 'make-local-hook 'ignore)
 (require 'sr-speedbar)
 
 (add-hook 'speedbar-mode-hook
