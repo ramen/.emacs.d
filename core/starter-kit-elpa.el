@@ -14,6 +14,7 @@
                                    'ido-ubiquitous
                                    'inf-ruby
                                    'magit
+                                   'rainbow-delimiters
                                    'ruby-mode
                                    'tuareg
                                    'yaml-mode
