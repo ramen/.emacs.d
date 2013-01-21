@@ -17,9 +17,12 @@
 
 (add-hook 'magit-mode-hook
           (lambda ()
-            (set-face-attribute 'magit-branch nil :inherit nil)
-            (set-face-attribute 'magit-item-highlight nil :inherit nil)
-            (set-face-attribute 'magit-section-title nil :inherit nil)))
+            (mapc (lambda (face) (set-face-attribute face nil :inherit nil))
+                  '(magit-branch
+                    magit-diff-add
+                    magit-diff-del
+                    magit-item-highlight
+                    magit-section-title))))
 
 (add-hook 'speedbar-mode-hook
           (lambda ()
