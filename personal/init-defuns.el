@@ -56,9 +56,9 @@
     (kill-buffer file-buffer)
     (set-window-dedicated-p log-window t)))
 
-(defun duplicate-line ()
-  "Clone the current line without changing the column position."
-  (interactive)
+(defun duplicate-line (arg)
+  "Clone the current line ARG times without changing the column position."
+  (interactive "p")
   (let ((col (current-column)))
     (end-of-line 1)
     (if (eobp) (open-line 1))
@@ -67,6 +67,9 @@
     (kill-line 1)
     (yank)
     (yank)
+    (when (> arg 1)
+      (save-excursion
+        (dotimes (i (- arg 1)) (yank))))
     (previous-line 1)
     (move-to-column col)))
 
