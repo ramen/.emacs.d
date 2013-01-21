@@ -1,7 +1,7 @@
 ;;; init-colors.el --- Color scheme configuration
 
 (require 'color-theme)
-
+(require 'color-theme-tango-2)
 (color-theme-tango-2)
 
 (global-hl-line-mode 1)
