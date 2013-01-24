@@ -3,8 +3,9 @@
 (blink-cursor-mode 1)
 (column-number-mode 1)
 (delete-selection-mode 1)
-(tooltip-mode 1)
 (winner-mode 1)
+
+(if (fboundp 'tooltip-mode) (tooltip-mode 1))
 
 (setenv "PAGER" "cat")
 
