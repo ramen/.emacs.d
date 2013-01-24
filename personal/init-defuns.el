@@ -217,7 +217,7 @@ default length of 8 characters."
   "Byte-compile all your dotfiles again."
   (interactive)
   (byte-recompile-directory dotfiles-dir 0)
-  (dolist (dir '("core" "modules" "vendor" "personal"))
+  (dolist (dir '("esk" "vendor" "personal"))
     (byte-recompile-directory (concat dotfiles-dir dir) 0)))
 
 (defun rotate-windows (count)
