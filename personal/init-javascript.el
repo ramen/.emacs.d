@@ -3,7 +3,6 @@
 (add-hook 'js2-mode-hook
           (lambda ()
             (esk-prog-mode-hook)
-            (abbrev-mode 1)
             (define-key js2-mode-map (kbd "RET") nil)))
 
 (setq js2-enter-indents-newline t)
