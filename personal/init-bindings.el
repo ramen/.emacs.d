@@ -88,6 +88,7 @@
 (global-set-key (kbd "M-&") 'insert-indentation)
 (global-set-key (kbd "M-'") 'insert-pair)
 (global-set-key (kbd "M-)") 'close-open-paren)
+(global-set-key (kbd "M-@") 'er/expand-region)
 (global-set-key (kbd "M-\"") 'insert-pair)
 (global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-_") 'goto-last-change)
