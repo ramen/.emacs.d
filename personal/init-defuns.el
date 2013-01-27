@@ -14,13 +14,13 @@
   "Comment or uncomment the current line."
   (interactive "*P")
   (cond (mark-active (comment-dwim arg))
-        ((= (line-beginning-position) (line-end-position)) (next-line 1))
+        ((= (line-beginning-position) (line-end-position)) (forward-line 1))
         (t (back-to-indentation)
            (set-mark-command nil)
            (end-of-line nil)
            (comment-dwim arg)
-           (back-to-indentation)
-           (next-line 1))))
+           (forward-line 1)
+           (back-to-indentation))))
 
 (defun condense-blank-lines ()
   (interactive)
@@ -70,7 +70,7 @@
     (when (> arg 1)
       (save-excursion
         (dotimes (i (- arg 1)) (yank))))
-    (previous-line 1)
+    (forward-line -1)
     (move-to-column col)))
 
 (defun extract-variable ()
@@ -136,7 +136,7 @@ between."
   (newline)
   (insert "}")
   (indent-according-to-mode)
-  (previous-line 1)
+  (forward-line -1)
   (end-of-line nil)
   (newline-and-indent))
 
@@ -281,6 +281,7 @@ default length of 8 characters."
   (interactive "r")
   (replace-regexp "^\\|$\\|	" "|" nil start end))
 
+(defvar old-fullscreen)
 (defun toggle-fullscreen ()
   (interactive)
   (if (eq window-system 'w32)
@@ -295,6 +296,7 @@ default length of 8 characters."
                              (progn (setq old-fullscreen current-value)
                                     'fullboth))))))
 
+(defvar unmaximized-window-configuration)
 (defun toggle-maximized ()
   (interactive)
   (cond ((window-parent)
@@ -308,6 +310,7 @@ default length of 8 characters."
   (interactive)
   (set-variable 'show-trailing-whitespace (not show-trailing-whitespace)))
 
+(defvar last-major-mode)
 (defun toggle-text-mode-fontified ()
   "Toggles text-mode while preserving fontification."
   (interactive)
