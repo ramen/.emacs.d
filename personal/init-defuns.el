@@ -23,12 +23,14 @@
            (back-to-indentation))))
 
 (defun condense-blank-lines ()
+  "Replace multiple blank lines with a single blank line."
   (interactive)
-  (replace-regexp "\n\n\n+" "\n\n" nil
-                  (if (and transient-mark-mode mark-active)
-                      (region-beginning))
-                  (if (and transient-mark-mode mark-active)
-                      (region-end))))
+  (let ((beginning (if (use-region-p) (region-beginning) (point-min)))
+        (end (if (use-region-p) (region-end) (point-max))))
+    (save-excursion
+      (goto-char beginning)
+      (while (re-search-forward "\n\n\n+" end t)
+        (replace-match "\n\n")))))
 
 (defun delete-whitespace-forward ()
   "Delete all whitespace between point and the next non-whitespace character."
