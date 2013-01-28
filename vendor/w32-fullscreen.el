@@ -48,6 +48,7 @@
 	   (puthash frame (cons (cons var val)
 				varlist) *w32-fullscreen-memtable*)))))
 
+;;;###autoload
 (defun w32-fullscreen()
   (interactive)
   "Toggle fullscreen display of current frame (windows only)"

@@ -22,15 +22,15 @@
            (forward-line 1)
            (back-to-indentation))))
 
-(defun condense-blank-lines ()
+(defun condense-blank-lines (start end)
   "Replace multiple blank lines with a single blank line."
-  (interactive)
-  (let ((beginning (if (use-region-p) (region-beginning) (point-min)))
-        (end (if (use-region-p) (region-end) (point-max))))
-    (save-excursion
-      (goto-char beginning)
-      (while (re-search-forward "\n\n\n+" end t)
-        (replace-match "\n\n")))))
+  (interactive (if (use-region-p)
+                   (list (region-beginning) (region-end))
+                 (list (point-min) (point-max))))
+  (save-excursion
+    (goto-char start)
+    (while (re-search-forward "\n\n\n+" end t)
+      (replace-match "\n\n"))))
 
 (defun delete-whitespace-forward ()
   "Delete all whitespace between point and the next non-whitespace character."
@@ -287,9 +287,7 @@ default length of 8 characters."
 (defun toggle-fullscreen ()
   (interactive)
   (if (eq window-system 'w32)
-      (progn
-        (require 'w32-fullscreen)
-        (w32-fullscreen))
+      (w32-fullscreen)
     ;; http://www.emacswiki.org/emacs/FullScreen
     (let ((current-value (frame-parameter nil 'fullscreen)))
       (set-frame-parameter nil 'fullscreen
