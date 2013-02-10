@@ -130,3 +130,6 @@
 
 ;; Fix delete key on OSX
 (global-set-key (kbd "<kp-delete>") 'delete-char)
+
+;; Fix ctrl-end on XQuartz
+(global-set-key (kbd "<clearline>") 'end-of-buffer)
