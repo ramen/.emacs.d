@@ -45,4 +45,8 @@
       (mouse-wheel-mode 1)
     (progn
       (global-set-key (kbd "<mouse-4>") 'scroll-down-1)
-      (global-set-key (kbd "<mouse-5>") 'scroll-up-1))))
+      (global-set-key (kbd "<mouse-5>") 'scroll-up-1)))
+
+  (when (eq system-type 'darwin)
+    (require 'pbcopy)
+    (turn-on-pbcopy)))
