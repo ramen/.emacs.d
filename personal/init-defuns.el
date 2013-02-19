@@ -58,6 +58,13 @@
     (kill-buffer file-buffer)
     (set-window-dedicated-p log-window t)))
 
+(defun duplicate-line-or-region (arg)
+  "Clone the current region if active, otherwise clone the current line."
+  (interactive "p")
+  (if mark-active
+      (duplicate-region arg)
+    (duplicate-line arg)))
+
 (defun duplicate-line (arg)
   "Clone the current line ARG times without changing the column position."
   (interactive "p")
@@ -74,6 +81,17 @@
         (dotimes (i (- arg 1)) (yank))))
     (forward-line -1)
     (move-to-column col)))
+
+(defun duplicate-region (arg)
+  "Clone the current region ARG times."
+  (interactive "p")
+  (kill-region (region-beginning) (region-end))
+  (yank)
+  (yank)
+  (when (> arg 1)
+    (save-excursion
+      (dotimes (i (- arg 1)) (yank))))
+  (setq deactivate-mark nil))
 
 (defun extract-variable ()
   "Micro-refactoring: replace the region with a variable and save an
