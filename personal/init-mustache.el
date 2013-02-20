@@ -9,6 +9,7 @@
             (turn-off-auto-fill)
             (zencoding-mode)))
 
+(autoload 'sgml-close-tag "sgml-mode")
+
 (define-key mustache-mode-map (kbd "C-c /") 'sgml-close-tag)
-(define-key mustache-mode-map (kbd "C-c C-t") 'sgml-tag)
 (define-key mustache-mode-map (kbd "RET") nil)
