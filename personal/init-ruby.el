@@ -3,6 +3,7 @@
 (add-hook 'ruby-mode-hook
           (lambda ()
             (esk-prog-mode-hook)
+            (define-key ruby-mode-map (kbd "RET") nil)
             (setq ruby-insert-encoding-magic-comment nil)
             (set (make-local-variable 'compile-command)
                  (format "cd %s && bundle exec rake"
