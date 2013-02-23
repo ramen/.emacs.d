@@ -5,7 +5,7 @@
 (let ((name "custom")
       (must-show-regexp nil)
       (must-show-function nil)
-      (dont-show-regexp "^\\*\\(Compile-Log\\|Messages\\|scratch\\)\\*$")
+      (dont-show-regexp "^\\*\\(Compile-Log\\|Completions\\|Help\\|Messages\\|scratch\\)\\*$")
       (dont-show-function (lambda (buf)
                             (with-current-buffer buf
                               (eq major-mode 'dired-mode))))
@@ -16,5 +16,4 @@
                      dont-show-regexp dont-show-function
                      buffer-sort-function)))
 
-(setq bs-alternative-configuration "files"
-      bs-default-configuration "custom")
+(setq bs-default-configuration "custom")
