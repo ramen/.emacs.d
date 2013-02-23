@@ -17,6 +17,8 @@
         scroll-left))
 
 (setq auto-save-default nil
+      bs-alternative-configuration "files"
+      bs-default-configuration "all"
       compilation-scroll-output 'first-error
       grep-command "grep -nHP -e "
       grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
