@@ -17,6 +17,7 @@
         scroll-left))
 
 (setq auto-save-default nil
+      comint-prompt-read-only t
       compilation-scroll-output 'first-error
       grep-command "grep -nHP -e "
       grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
