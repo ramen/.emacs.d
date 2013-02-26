@@ -132,3 +132,7 @@
 
 ;; Fix ctrl-end on XQuartz
 (global-set-key (kbd "<clearline>") 'end-of-buffer)
+
+;; Use subword-mode-compatible bindings for ctrl-arrow
+(global-set-key (kbd "<C-left>") 'backward-word)
+(global-set-key (kbd "<C-right>") 'forward-word)
