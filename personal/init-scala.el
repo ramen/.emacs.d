@@ -21,4 +21,6 @@
                               (top (mapconcat 'identity (nreverse proj-dirs) "/")))
                          (format "cd %s && mvn -pl :%s-%s -am compile" top proj subproj))
                      (format "cd %s && sbt test"
-                             (locate-dominating-file default-directory "project")))))))
+                             (locate-dominating-file default-directory "project")))))
+            (cond ((fboundp 'subword-mode) (subword-mode 1))
+                  ((fboundp 'c-subword-mode) (c-subword-mode 1)))))
