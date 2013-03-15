@@ -2,6 +2,7 @@
 
 (add-hook 'dired-mode-hook
           (lambda ()
+            (auto-revert-mode 1)
             (define-key dired-mode-map "." 'dired-up-directory)
             (define-key dired-mode-map "e" 'wdired-change-to-wdired-mode)
             (define-key dired-mode-map "l" 'dired-vc-log)
