@@ -16,7 +16,8 @@
         narrow-to-region
         scroll-left))
 
-(setq auto-save-default nil
+(setq auto-revert-verbose nil
+      auto-save-default nil
       compilation-scroll-output 'first-error
       grep-command "grep -nHP -e "
       grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
