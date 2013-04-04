@@ -160,6 +160,13 @@ between."
   (end-of-line nil)
   (newline-and-indent))
 
+(defun insert-empty-line ()
+  "Insert an empty line after the current line.
+ Position the cursor at its beginning, according to the current mode."
+   (interactive)
+   (move-end-of-line nil)
+   (newline-and-indent))
+
 (defun insert-indentation ()
   "Insert a newline and indent at the next space, like delete-indentation in
 reverse."
