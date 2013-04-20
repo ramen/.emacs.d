@@ -160,10 +160,11 @@ between."
   (end-of-line nil)
   (newline-and-indent))
 
-(defun insert-empty-line ()
+(defun insert-empty-line (arg)
   "Insert an empty line after the current line.
  Position the cursor at its beginning, according to the current mode."
-   (interactive)
+   (interactive "p")
+   (forward-line (if (< arg 0) arg (- arg 1)))
    (move-end-of-line nil)
    (newline-and-indent))
 
