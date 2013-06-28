@@ -19,6 +19,9 @@
 (setq auto-revert-verbose nil
       auto-save-default nil
       compilation-scroll-output 'first-error
+      ffip-patterns '("*.css" "*.el" "*.html" "*.java" "*.js" "*.mustache"
+                      "*.rb" "*.rhtml" "*.scala" "*.txt")
+      ffip-project-file "pom.xml"
       grep-command "grep -nHP -e "
       grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
       grep-template "grep <C> -nHP -e <R> <F>"
