@@ -92,6 +92,7 @@
 (global-set-key (kbd "M-\"") 'insert-pair)
 (global-set-key (kbd "M-]") 'insert-curlies)
 (global-set-key (kbd "M-_") 'goto-last-change)
+(global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "M-n") 'repeat-complex-command)
 (global-set-key (kbd "M-p") 'repeat-complex-command)
 (global-set-key (kbd "M-q") 'fill-individual-paragraphs)
