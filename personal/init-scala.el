@@ -15,11 +15,7 @@
             (set (make-local-variable 'compile-command)
                  (let ((mvn-dir (locate-dominating-file default-directory "pom.xml")))
                    (if mvn-dir
-                       (let* ((proj-dirs (nreverse (split-string mvn-dir "/" t)))
-                              (subproj (pop proj-dirs))
-                              (proj (pop proj-dirs))
-                              (top (mapconcat 'identity (nreverse proj-dirs) "/")))
-                         (format "cd %s && mvn -pl :%s-%s -am compile" top proj subproj))
+                       (format "cd %s && mvn test" mvn-dir)
                      (format "cd %s && sbt test"
                              (locate-dominating-file default-directory "project")))))
             (cond ((fboundp 'subword-mode) (subword-mode 1))
