@@ -8,5 +8,5 @@
 
 ;; http://stackoverflow.com/questions/2413047/ddg#2413472
 (setq hl-paren-colors
-      '("orange1" "yellow1" "greenyellow" "green1"
-        "springgreen1" "cyan1" "slateblue1" "magenta1" "purple"))
+      '("purple" "magenta1" "slateblue1" "cyan1" "springgreen1"
+        "green1" "greenyellow" "yellow1" "orange1"))
