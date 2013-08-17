@@ -13,10 +13,17 @@
                 (newline-and-indent)))
             (define-key scala-mode-map (kbd "C-c C-s") 'scala-run-scala)
             (set (make-local-variable 'compile-command)
-                 (let ((mvn-dir (locate-dominating-file default-directory "pom.xml")))
-                   (if mvn-dir
-                       (format "cd %s && mvn test" mvn-dir)
-                     (format "cd %s && sbt test"
-                             (locate-dominating-file default-directory "project")))))
+                 (let ((pants-dir (locate-dominating-file default-directory "BUILD"))
+                       (mvn-dir (locate-dominating-file default-directory "pom.xml"))
+                       (sbt-dir (locate-dominating-file default-directory "project")))
+                   (cond (pants-dir
+                          (let* ((pants-root (locate-dominating-file default-directory "pants"))
+                                 (src-dir (locate-dominating-file default-directory "src"))
+                                 (proj-dirs (nreverse (split-string src-dir "/" t)))
+                                 (subproj (pop proj-dirs))
+                                 (proj (pop proj-dirs)))
+                                 (format "cd %s && ./pants goal test %s/%s:tests" pants-root proj subproj)))
+                         (mvn-dir (format "cd %s && mvn test" mvn-dir))
+                         (sbt-dir (format "cd %s && sbt test" sbt-dir)))))
             (cond ((fboundp 'subword-mode) (subword-mode 1))
                   ((fboundp 'c-subword-mode) (c-subword-mode 1)))))
