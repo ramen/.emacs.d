@@ -15,6 +15,10 @@
             (set-face-foreground 'erc-nick-default-face "#729fcf")
             (set-face-foreground 'erc-timestamp-face "gray30")))
 
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (set-face-foreground 'js2-function-param-face "#fce94f")))
+
 (add-hook 'magit-mode-hook
           (lambda ()
             (mapc (lambda (face) (set-face-attribute face nil :inherit nil))
