@@ -6,8 +6,7 @@
           (lambda ()
             (esk-prog-mode-hook)
             (setq comment-start-skip "\\(\\(^\\|[^\\\\\n]\\)\\(\\\\\\\\\\)*\\);+ *")
-            (turn-off-auto-fill)
-            (zencoding-mode)))
+            (turn-off-auto-fill)))
 
 (autoload 'sgml-close-tag "sgml-mode")
 

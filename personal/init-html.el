@@ -5,8 +5,7 @@
             (esk-prog-mode-hook)
             (local-set-key (kbd "RET") nil)
             (setq paragraph-start "\f\\|[ \t]*$"
-                  paragraph-separate "[ \t\f]*$")
-            (zencoding-mode)))
+                  paragraph-separate "[ \t\f]*$")))
 
 (eval-after-load 'sgml-mode
   '(progn
