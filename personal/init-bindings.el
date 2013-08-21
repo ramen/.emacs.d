@@ -21,6 +21,7 @@
 
 ;; Function keys
 (global-set-key (kbd "<M-f1>") 'toggle-text-mode-fontified)
+(global-set-key (kbd "<f2>") 'sort-lines)
 (global-set-key (kbd "<M-f2>") 'align-regexp)
 (global-set-key (kbd "<f3>") 'query-replace)
 (global-set-key (kbd "<M-f3>") 'query-replace-regexp)
