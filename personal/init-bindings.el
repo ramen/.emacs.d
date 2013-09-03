@@ -83,6 +83,7 @@
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "C-M-n") 'move-region-down)
 (global-set-key (kbd "C-M-p") 'move-region-up)
+(global-set-key (kbd "C-M-w") 'kill-ring-append)
 (global-set-key (kbd "C-\\") 'delete-whitespace-forward)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "M-&") 'insert-indentation)
