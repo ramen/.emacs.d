@@ -187,12 +187,6 @@ default length of 8 characters."
         (insert (substring pw-chars offset (+ offset 1)))
         (setq pw-length (- pw-length 1))))))
 
-(defun kill-ring-append (beg end)
-  "Appends the region to the previous kill."
-  (interactive "r")
-  (append-next-kill)
-  (kill-ring-save beg end))
-
 (unless (fboundp 'kill-whole-line)
   (defun kill-whole-line (&optional arg)
     "Kill the entire current line regardless of cursor position."
