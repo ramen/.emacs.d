@@ -1,6 +1,7 @@
 ;;; init-python.el --- Python mode configuration
 
 (setq auto-mode-alist (cons '("BUILD" . python-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.aurora$" . python-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.mesos$" . python-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\\.thermos$" . python-mode) auto-mode-alist))
 
