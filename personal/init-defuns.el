@@ -343,7 +343,7 @@ default length of 8 characters."
   (if (eq major-mode 'text-mode)
       (if (boundp 'last-major-mode)
           (funcall last-major-mode))
-    (dflet ((font-lock-change-mode () ()))
+    (dflet ((font-lock-change-mode ()))
       (setq last-major-mode major-mode)
       (text-mode))))
 
