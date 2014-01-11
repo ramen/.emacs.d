@@ -114,7 +114,7 @@
            (insert (current-kill 0)))))
 
 (defun esk-sudo-edit (&optional arg)
-  (interactive "p")
+  (interactive "P")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
