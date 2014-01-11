@@ -294,6 +294,8 @@ default length of 8 characters."
       (end-kbd-macro)
     (start-kbd-macro nil)))
 
+(defalias 'sudo-edit 'esk-sudo-edit)
+
 (defun swap-with-largest-window ()
   "Switch the buffer in the current window with that of the largest window."
   (interactive)
