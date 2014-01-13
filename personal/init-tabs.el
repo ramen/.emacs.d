@@ -12,11 +12,10 @@
   "Set local tab width and whether or not tab characters should be used"
   (setq indent-tabs-mode use-tabs)
   (setq tab-stop-list (make-tab-stop-list width 80))
-  (dolist (var '(c-basic-offset
-                 css-indent-offset css-indent-level
-                 espresso-indent-level javascript-indent-level
+  (dolist (var '(c-basic-offset css-indent-offset css-indent-level
+                 espresso-indent-level javascript-indent-level js-indent-level
                  python-indent py-indent-offset rust-indent-unit
-                 sgml-basic-offset zencoding-indentation
+                 sgml-basic-offset sh-basic-offset zencoding-indentation
                  standard-indent tab-width))
     (set var width)))
 
