@@ -15,3 +15,24 @@
           (lambda ()
             (setq inf-ruby-first-prompt-pattern "^\\(?:irb(.*?)[0-9:]+0\\|ree[^ ]* [0-9:]+ \\)> *")
             (setq inf-ruby-prompt-pattern "^\\(\\(?:irb(.*?)[0-9:]+\\|ree[^ ]* [0-9:]+ \\)[>*\"'] *\\)+")))
+
+(setq ruby-deep-arglist nil)
+(setq ruby-deep-indent-paren nil)
+(setq ruby-deep-indent-paren-style nil)
+
+;;; fix closing paren indentation. Stolen from
+;;; https://gist.github.com/1274520
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
