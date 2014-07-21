@@ -9,6 +9,8 @@
                                    'expand-region
                                    'find-file-in-project
                                    'flymake-cursor
+                                   'flymake-easy
+                                   'flymake-ruby
                                    'full-ack
                                    'idle-highlight-mode
                                    'ido-ubiquitous

@@ -1,6 +1,7 @@
 ;;; init-compile.el --- compilation settings
 
 (require 'ansi-color)
+(require 'flymake-cursor)
 
 (defun colorize-compilation-buffer ()
   (unless (eq major-mode 'grep-mode)
