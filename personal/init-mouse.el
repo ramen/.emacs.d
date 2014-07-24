@@ -4,6 +4,9 @@
 (setq mouse-wheel-progressive-speed nil
       mouse-wheel-scroll-amount '(2))
 
+;; super-click to open urls in browser
+(global-set-key [s-mouse-1] 'browse-url-at-mouse)
+
 ;; ctrl-wheel to zoom font size
 (if (eq window-system 'w32)
     (progn
