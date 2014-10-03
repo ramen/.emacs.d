@@ -17,6 +17,7 @@
                                    'inf-ruby
                                    'magit
                                    'ruby-mode
+                                   'scss-mode
                                    'tuareg
                                    'yaml-mode)
   "Libraries that should be installed by default.")
