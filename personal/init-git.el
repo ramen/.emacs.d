@@ -27,14 +27,21 @@
 
 (add-hook 'magit-mode-hook
           (lambda ()
+            (define-key magit-mode-map (kbd "C-1") 'magit-show-level-1-all)
+            (define-key magit-mode-map (kbd "C-2") 'magit-show-level-2-all)
+            (define-key magit-mode-map (kbd "C-3") 'magit-show-level-3-all)
+            (define-key magit-mode-map (kbd "C-4") 'magit-show-level-4-all)
             (define-key magit-mode-map (kbd "M-1") 'digit-argument)
             (define-key magit-mode-map (kbd "M-2") 'digit-argument)
             (define-key magit-mode-map (kbd "M-3") 'digit-argument)
             (define-key magit-mode-map (kbd "M-4") 'digit-argument)
-            (define-key magit-mode-map (kbd "C-1") 'magit-show-level-1-all)
-            (define-key magit-mode-map (kbd "C-2") 'magit-show-level-2-all)
-            (define-key magit-mode-map (kbd "C-3") 'magit-show-level-3-all)
-            (define-key magit-mode-map (kbd "C-4") 'magit-show-level-4-all)))
+            (define-key magit-mode-map (kbd "o") 'magit-visit-item-other-window)))
+
+(defun magit-visit-item-other-window ()
+  "Visit current item in other window."
+  (interactive)
+  (magit-visit-item 1)
+  (other-window -1))
 
 (defun magit-ido-completing-read (prompt choices &optional predicate require-match initial-input hist def)
   "ido-based completing-read almost-replacement."
