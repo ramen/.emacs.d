@@ -26,4 +26,5 @@
 
 (setq find-ls-option '("-exec ls -ld {} \\;" . "-ld"))
 
+(defalias 'fgdired 'find-grep-dired)
 (defalias 'fndired 'find-name-dired)
