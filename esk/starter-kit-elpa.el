@@ -14,7 +14,6 @@
                                    'full-ack
                                    'idle-highlight-mode
                                    'ido-ubiquitous
-                                   'inf-ruby
                                    'magit
                                    'ruby-mode
                                    'scss-mode

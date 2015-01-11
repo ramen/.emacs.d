@@ -12,10 +12,9 @@
             (cond ((fboundp 'subword-mode) (subword-mode 1))
                   ((fboundp 'c-subword-mode) (c-subword-mode 1)))))
 
-(add-hook 'inf-ruby-mode-hook
-          (lambda ()
-            (setq inf-ruby-first-prompt-pattern "^\\(?:irb(.*?)[0-9:]+0\\|ree[^ ]* [0-9:]+ \\)> *")
-            (setq inf-ruby-prompt-pattern "^\\(\\(?:irb(.*?)[0-9:]+\\|ree[^ ]* [0-9:]+ \\)[>*\"'] *\\)+")))
+(eval-after-load 'inf-ruby
+  '(define-key inf-ruby-minor-mode-map
+     (kbd "C-c C-s") 'inf-ruby-console-auto))
 
 (setq ruby-deep-arglist nil)
 (setq ruby-deep-indent-paren nil)
