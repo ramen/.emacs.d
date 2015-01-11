@@ -17,6 +17,7 @@
 
 (add-hook 'js2-mode-hook
           (lambda ()
+            (set-face-foreground 'js2-external-variable-face "#ff0000")
             (set-face-foreground 'js2-function-param-face "#fce94f")))
 
 (add-hook 'magit-mode-hook
