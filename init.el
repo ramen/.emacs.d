@@ -47,6 +47,7 @@
 (require 'ansi-color)
 (require 'recentf)
 (require 'iedit)
+(require 'longlines)
 
 ;; backport some functionality to Emacs 22 if needed
 (require 'dominating-file)
