@@ -17,8 +17,8 @@
 
 (add-hook 'js2-mode-hook
           (lambda ()
-            (set-face-foreground 'js2-external-variable-face "#ff0000")
-            (set-face-foreground 'js2-function-param-face "#fce94f")))
+            (set-face-foreground 'js2-external-variable "#ff0000")
+            (set-face-foreground 'js2-function-param "#fce94f")))
 
 (add-hook 'magit-mode-hook
           (lambda ()
@@ -53,8 +53,8 @@
 (custom-set-faces
  '(flymake-errline ((((class color)) (:underline "red"))))
  '(flymake-warnline ((((class color)) (:underline "orange"))))
- '(js2-error-face ((((class color)) (:underline "red"))))
- '(js2-warning-face ((((class color)) (:underline "orange")))))
+ '(js2-error ((((class color)) (:underline "red"))))
+ '(js2-warning ((((class color)) (:underline "orange")))))
 
 (when window-system
   ;; Fancy color map for shell-mode, etc.
