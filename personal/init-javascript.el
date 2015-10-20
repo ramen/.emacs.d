@@ -6,6 +6,7 @@
             (define-key js2-mode-map (kbd "RET") nil)))
 
 (add-to-list 'auto-mode-alist '("\\.jsx$" . js-mode))
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 (setq js2-enter-indents-newline t)
 (setq js2-mirror-mode nil)
