@@ -22,9 +22,9 @@
                                  (proj-dirs (nreverse (split-string src-dir "/" t)))
                                  (subproj (pop proj-dirs))
                                  (proj (pop proj-dirs)))
-                                 (format "cd %s && ./pants goal test %s/%s:tests"
+                                 (format "cd %s && ./pants test %s/%s::"
                                          pants-root
-                                         (if (member proj '("b" "birdcage")) "." proj)
+                                         proj
                                          subproj)))
                          (mvn-dir (format "cd %s && mvn test" mvn-dir))
                          (sbt-dir (format "cd %s && sbt test" sbt-dir)))))
