@@ -40,7 +40,8 @@
 (defun magit-visit-item-other-window ()
   "Visit current item in other window."
   (interactive)
-  (magit-visit-item 1)
+  (let ((current-prefix-arg '(4)))
+    (magit-visit-item))
   (other-window -1))
 
 (defun magit-ido-completing-read (prompt choices &optional predicate require-match initial-input hist def)
