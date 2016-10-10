@@ -68,6 +68,7 @@
 (case window-system
   (w32 (setq browse-url-browser-function 'browse-url-default-windows-browser))
   (mac (setq browse-url-browser-function 'browse-url-default-macosx-browser))
+  (ns (setq browse-url-browser-function 'browse-url-default-macosx-browser))
   (otherwise (setq browse-url-browser-function 'browse-url-generic
                    browse-url-generic-program "sensible-browser")))
 
