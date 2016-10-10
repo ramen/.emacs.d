@@ -45,3 +45,6 @@
       window-combination-resize t)
 
 (setq-default fill-column 78)
+
+(require 'grep)
+(add-to-list 'grep-find-ignored-directories "node_modules")
