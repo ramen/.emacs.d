@@ -2,6 +2,8 @@
 
 (require 'scala-mode-auto)
 
+(add-to-list 'auto-mode-alist '("\\.strato$" . scala-mode))
+
 (add-hook 'scala-mode-hook
           (lambda ()
             (esk-prog-mode-hook)
