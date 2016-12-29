@@ -20,15 +20,6 @@
             (set-face-foreground 'js2-external-variable "#ff0000")
             (set-face-foreground 'js2-function-param "#fce94f")))
 
-(add-hook 'magit-mode-hook
-          (lambda ()
-            (mapc (lambda (face) (set-face-attribute face nil :inherit nil))
-                  '(magit-branch
-                    magit-diff-add
-                    magit-diff-del
-                    magit-item-highlight
-                    magit-section-title))))
-
 (add-hook 'speedbar-mode-hook
           (lambda ()
             (set-face-background 'speedbar-highlight-face "#444444")
