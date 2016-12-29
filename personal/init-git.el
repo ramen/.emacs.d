@@ -34,8 +34,20 @@
      (magit-key-mode-insert-switch 'logging "-nm" "No merges" "--no-merges")
      (magit-key-mode-insert-switch 'pulling "-v" "Verbose" "-v")))
 
+(add-hook 'magit-mode-hook
+          (lambda ()
+            (define-key magit-mode-map (kbd "C-1") 'magit-section-show-level-1-all)
+            (define-key magit-mode-map (kbd "C-2") 'magit-section-show-level-2-all)
+            (define-key magit-mode-map (kbd "C-3") 'magit-section-show-level-3-all)
+            (define-key magit-mode-map (kbd "C-4") 'magit-section-show-level-4-all)
+            (define-key magit-mode-map (kbd "M-1") 'digit-argument)
+            (define-key magit-mode-map (kbd "M-2") 'digit-argument)
+            (define-key magit-mode-map (kbd "M-3") 'digit-argument)
+            (define-key magit-mode-map (kbd "M-4") 'digit-argument)))
+
 (setq magit-completing-read-function 'magit-ido-completing-read)
 (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
+(setq magit-revision-insert-related-refs nil)
 (setq magit-status-buffer-switch-function 'switch-to-buffer)
 
 (defadvice magit-diff (after magit-diff-advice activate)
