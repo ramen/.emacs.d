@@ -4,6 +4,7 @@
 (require 'git-blame)
 
 (setq git-blame-prefix-format "%h %20.20a ")
+(setq git-commit-summary-max-length 72)
 
 (defalias 'vc-blame 'vc-annotate)
 
@@ -19,12 +20,14 @@
 
 (eval-after-load 'magit
   '(progn
+     (magit-define-popup-switch 'magit-log-popup ?f "first parent" "--first-parent")
+     (magit-remove-popup-key 'magit-diff-popup   :action ?d)
+     (magit-change-popup-key 'magit-diff-popup   :action ?r ?d)
      ;; https://github.com/magit/magit/wiki/Restore-pre-v2.4-key-bindings
      (magit-change-popup-key 'magit-fetch-popup  :action ?u ?f)
      (magit-change-popup-key 'magit-pull-popup   :action ?u ?F)
      (magit-change-popup-key 'magit-rebase-popup :action ?e ?r)
-     (magit-change-popup-key 'magit-push-popup   :action ?p ?P)
-     (magit-define-popup-switch 'magit-log-popup ?f "first parent" "--first-parent")))
+     (magit-change-popup-key 'magit-push-popup   :action ?p ?P)))
 
 (eval-after-load 'magit-key-mode
   '(progn
