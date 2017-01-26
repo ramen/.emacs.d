@@ -32,8 +32,7 @@
 (setq custom-file (concat dotfiles-dir "custom.el"))
 
 (require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 (require 'starter-kit-elpa)
 
