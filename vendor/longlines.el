@@ -1,28 +1,28 @@
-;;; longlines.el --- automatically wrap long lines
+;;; longlines.el --- automatically wrap long lines   -*- coding:utf-8 -*-
 
-;; Copyright (C) 2000, 2001, 2004, 2005 Free Software Foundation, Inc.
+;; Copyright (C) 2000-2001, 2004-2017 Free Software Foundation, Inc.
 
 ;; Authors:    Kai Grossjohann <Kai.Grossjohann@CS.Uni-Dortmund.DE>
 ;;             Alex Schroeder <alex@gnu.org>
 ;;             Chong Yidong <cyd@stupidchicken.com>
 ;; Maintainer: Chong Yidong <cyd@stupidchicken.com>
-;; Version: 2.3.4
+;; Obsolete-since: 24.4
 ;; Keywords: convenience, wp
 
-;; This file is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
-;; any later version.
+;; This file is part of GNU Emacs.
 
-;; This file is distributed in the hope that it will be useful,
+;; GNU Emacs is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; GNU Emacs is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
@@ -36,48 +36,14 @@
 
 ;; Special thanks to Rod Smith for many useful bug reports.
 
-;;; Installation:
-
-;; Save longlines.el in a convenient directory, preferably in
-;; your `load-path'. Add the following to your `user-init-file':
-;;
-;;   (autoload 'longlines-mode
-;;     "longlines.el"
-;;     "Minor mode for automatically wrapping long lines." t)
-
-;;; Todo:
-
-;; Investigate ^M characters showing up in relation to auto-save-file,
-;; at least for NTEmacs.
-
 ;;; Code:
-
-(require 'easy-mmode)
-
-(if (featurep 'xemacs)
-    (eval-and-compile
-      (require 'overlay)
-      (defvar fill-nobreak-predicate nil)
-      (defvar undo-in-progress nil)
-      (defvar longlines-mode-hook nil)
-      (defvar longlines-mode-on-hook nil)
-      (defvar longlines-mode-off-hook nil)
-      (unless (functionp 'line-end-position)
-	(defun line-end-position ()
-	  (save-excursion (end-of-line) (point))))
-      (unless (functionp 'line-beginning-position)
-	(defun line-beginning-position (&optional n)
-	  (save-excursion
-	    (if n (forward-line n))
-	    (beginning-of-line)
-	    (point))))))
 
 (defgroup longlines nil
   "Automatic wrapping of long lines when loading files."
   :group 'fill)
 
 (defcustom longlines-auto-wrap t
-  "*Non-nil means long lines are automatically wrapped after each command.
+  "Non-nil means long lines are automatically wrapped after each command.
 Otherwise, you can perform filling using `fill-paragraph' or
 `auto-fill-mode'.  In any case, the soft newlines will be removed
 when the file is saved to disk."
@@ -85,27 +51,27 @@ when the file is saved to disk."
   :type 'boolean)
 
 (defcustom longlines-wrap-follows-window-size nil
-  "*Non-nil means wrapping and filling happen at the edge of the window.
+  "Non-nil means wrapping and filling happen at the edge of the window.
 Otherwise, `fill-column' is used, regardless of the window size.  This
 does not work well when the buffer is displayed in multiple windows
-with differing widths."
+with differing widths.
+
+If the value is an integer, that specifies the distance from the
+right edge of the window at which wrapping occurs.  For any other
+non-nil value, wrapping occurs 2 characters from the right edge."
   :group 'longlines
   :type 'boolean)
 
 (defcustom longlines-show-hard-newlines nil
-  "*Non-nil means each hard newline is marked on the screen.
+  "Non-nil means each hard newline is marked on the screen.
 \(The variable `longlines-show-effect' controls what they look like.)
 You can also enable the display temporarily, using the command
-`longlines-show-hard-newlines'"
+`longlines-show-hard-newlines'."
   :group 'longlines
   :type 'boolean)
 
-(defface longlines-visible-face
-  '((t (:foreground "cyan")))
-  "Face used to make hard newlines visible in `longlines-mode'.")
-
-(defcustom longlines-show-effect (propertize "|" 'face 'longlines-visible-face)
-  "*A string to display when showing hard newlines.
+(defcustom longlines-show-effect (propertize "¶\n" 'face 'escape-glyph)
+  "A string to display when showing hard newlines.
 This is used when `longlines-show-hard-newlines' is on."
   :group 'longlines
   :type 'string)
@@ -116,71 +82,116 @@ This is used when `longlines-show-hard-newlines' is on."
 (defvar longlines-wrap-end nil)
 (defvar longlines-wrap-point nil)
 (defvar longlines-showing nil)
+(defvar longlines-decoded nil)
 
 (make-variable-buffer-local 'longlines-wrap-beg)
 (make-variable-buffer-local 'longlines-wrap-end)
 (make-variable-buffer-local 'longlines-wrap-point)
 (make-variable-buffer-local 'longlines-showing)
+(make-variable-buffer-local 'longlines-decoded)
 
 ;; Mode
 
+(defvar message-indent-citation-function)
+
 ;;;###autoload
 (define-minor-mode longlines-mode
-  "Toggle Long Lines mode.
-In Long Lines mode, long lines are wrapped if they extend beyond
-`fill-column'.  The soft newlines used for line wrapping will not
-show up when the text is yanked or saved to disk.
+  "Toggle Long Lines mode in this buffer.
+With a prefix argument ARG, enable Long Lines mode if ARG is
+positive, and disable it otherwise.  If called from Lisp, enable
+the mode if ARG is omitted or nil.
 
-If the variable `longlines-auto-wrap' is non-nil, lines are automatically
-wrapped whenever the buffer is changed.  You can always call
-`fill-paragraph' to fill individual paragraphs.
+When Long Lines mode is enabled, long lines are wrapped if they
+extend beyond `fill-column'.  The soft newlines used for line
+wrapping will not show up when the text is yanked or saved to
+disk.
 
-If the variable `longlines-show-hard-newlines' is non-nil, hard newlines
-are indicated with a symbol."
+If the variable `longlines-auto-wrap' is non-nil, lines are
+automatically wrapped whenever the buffer is changed.  You can
+always call `fill-paragraph' to fill individual paragraphs.
+
+If the variable `longlines-show-hard-newlines' is non-nil, hard
+newlines are indicated with a symbol."
   :group 'longlines :lighter " ll"
   (if longlines-mode
       ;; Turn on longlines mode
       (progn
         (use-hard-newlines 1 'never)
+        (set (make-local-variable 'require-final-newline) nil)
         (add-to-list 'buffer-file-format 'longlines)
         (add-hook 'change-major-mode-hook 'longlines-mode-off nil t)
 	(add-hook 'before-revert-hook 'longlines-before-revert-hook nil t)
+        (make-local-variable 'buffer-substring-filters)
+        (make-local-variable 'longlines-auto-wrap)
+	(set (make-local-variable 'isearch-search-fun-function)
+	     'longlines-search-function)
+	(set (make-local-variable 'replace-search-function)
+	     'longlines-search-forward)
+	(set (make-local-variable 'replace-re-search-function)
+	     'longlines-re-search-forward)
+        (add-to-list 'buffer-substring-filters 'longlines-encode-string)
         (when longlines-wrap-follows-window-size
-          (set (make-local-variable 'fill-column)
-               (- (window-width) window-min-width))
+	  (let ((dw (if (and (integerp longlines-wrap-follows-window-size)
+			     (>= longlines-wrap-follows-window-size 0)
+			     (< longlines-wrap-follows-window-size
+				(window-width)))
+			longlines-wrap-follows-window-size
+		      2)))
+	    (set (make-local-variable 'fill-column)
+		 (- (window-width) dw)))
           (add-hook 'window-configuration-change-hook
                     'longlines-window-change-function nil t))
         (let ((buffer-undo-list t)
               (inhibit-read-only t)
-	      (after-change-functions nil)
-              (mod (buffer-modified-p)))
+	      (inhibit-modification-hooks t)
+              (mod (buffer-modified-p))
+	      buffer-file-name buffer-file-truename)
           ;; Turning off undo is OK since (spaces + newlines) is
           ;; conserved, except for a corner case in
           ;; longlines-wrap-lines that we'll never encounter from here
 	  (save-restriction
 	    (widen)
-	    (longlines-decode-buffer)
+	    (unless longlines-decoded
+	      (longlines-decode-buffer)
+	      (setq longlines-decoded t))
 	    (longlines-wrap-region (point-min) (point-max)))
           (set-buffer-modified-p mod))
         (when (and longlines-show-hard-newlines
                    (not longlines-showing))
           (longlines-show-hard-newlines))
+
+	;; Hacks to make longlines play nice with various modes.
+	(cond ((eq major-mode 'mail-mode)
+	       (add-hook 'mail-setup-hook 'longlines-decode-buffer nil t)
+	       (or mail-citation-hook
+		   (add-hook 'mail-citation-hook 'mail-indent-citation nil t))
+	       (add-hook 'mail-citation-hook 'longlines-decode-region nil t))
+	      ((eq major-mode 'message-mode)
+	       (add-hook 'message-setup-hook 'longlines-decode-buffer nil t)
+	       (make-local-variable 'message-indent-citation-function)
+	       (if (not (listp message-indent-citation-function))
+		   (setq message-indent-citation-function
+			 (list message-indent-citation-function)))
+	       (add-to-list 'message-indent-citation-function
+			    'longlines-decode-region t)))
+
+	(add-hook 'after-change-functions 'longlines-after-change-function nil t)
+	(add-hook 'post-command-hook 'longlines-post-command-function nil t)
         (when longlines-auto-wrap
-          (auto-fill-mode 0)
-          (add-hook 'after-change-functions
-                    'longlines-after-change-function nil t)
-          (add-hook 'post-command-hook
-                    'longlines-post-command-function nil t)))
+          (auto-fill-mode 0)))
     ;; Turn off longlines mode
     (setq buffer-file-format (delete 'longlines buffer-file-format))
     (if longlines-showing
         (longlines-unshow-hard-newlines))
     (let ((buffer-undo-list t)
-	  (after-change-functions nil)
-          (inhibit-read-only t))
-      (save-restriction
-	(widen)
-	(longlines-encode-region (point-min) (point-max))))
+	  (inhibit-modification-hooks t)
+          (inhibit-read-only t)
+	  buffer-file-name buffer-file-truename)
+      (if longlines-decoded
+	  (save-restriction
+	    (widen)
+	    (longlines-encode-region (point-min) (point-max))
+	    (setq longlines-decoded nil))))
     (remove-hook 'change-major-mode-hook 'longlines-mode-off t)
     (remove-hook 'after-change-functions 'longlines-after-change-function t)
     (remove-hook 'post-command-hook 'longlines-post-command-function t)
@@ -189,6 +200,11 @@ are indicated with a symbol."
                  'longlines-window-change-function t)
     (when longlines-wrap-follows-window-size
       (kill-local-variable 'fill-column))
+    (kill-local-variable 'isearch-search-fun-function)
+    (kill-local-variable 'replace-search-function)
+    (kill-local-variable 'replace-re-search-function)
+    (kill-local-variable 'require-final-newline)
+    (kill-local-variable 'buffer-substring-filters)
     (kill-local-variable 'use-hard-newlines)))
 
 (defun longlines-mode-off ()
@@ -201,49 +217,43 @@ major mode changes."
 
 (defun longlines-show-hard-newlines (&optional arg)
   "Make hard newlines visible by adding a face.
-With optional argument ARG, make the hard newlines invisible again
-by calling `longlines-unshow-hard-newlines'."
+With optional argument ARG, make the hard newlines invisible again."
   (interactive "P")
-  (if arg
-      (longlines-unshow-hard-newlines)
-    (save-excursion
+    (if arg
+        (longlines-unshow-hard-newlines)
       (setq longlines-showing t)
-      ;; We want to show every single newline.  Therefore every single
-      ;; newline must get its own overlay.  No spanning of multiple
-      ;; newlines with one overlay.
-      (let ((pos (text-property-any (point-min) (point-max) 'hard t)))
-	(while pos
-	  (longlines-show-region pos (1+ pos))
-	  (setq pos (text-property-any (1+ pos) (point-max) 'hard t)))))))
+      (longlines-show-region (point-min) (point-max))))
 
-(defun longlines-show-region (start end)
-  "Make region between START and END visible."
-  (unless (let ((os (overlays-in start end))
-		o exists)
-	    (while (and os (not exists))
-	      (setq o (car os)
-		    os (cdr os))
-	      (when (overlay-get o 'longlines)
-		(setq exists t)))
-	    exists)
-    (let ((o (make-overlay start end nil t)))
-      (if (consp longlines-show-effect)
-	  (overlay-put o (car longlines-show-effect) (cdr longlines-show-effect))
-	(overlay-put o 'before-string longlines-show-effect))
-      (overlay-put o 'longlines t)
-      (overlay-put o 'evaporate t))))
+(defun longlines-show-region (beg end)
+  "Make hard newlines between BEG and END visible."
+  (let* ((pmin (min beg end))
+         (pmax (max beg end))
+         (pos (text-property-not-all pmin pmax 'hard nil))
+	 (mod (buffer-modified-p))
+	 (buffer-undo-list t)
+	 (inhibit-read-only t)
+	 (inhibit-modification-hooks t)
+	 buffer-file-name buffer-file-truename)
+    (while pos
+      (put-text-property pos (1+ pos) 'display
+			 (copy-sequence longlines-show-effect))
+      (setq pos (text-property-not-all (1+ pos) pmax 'hard nil)))
+    (restore-buffer-modified-p mod)))
 
 (defun longlines-unshow-hard-newlines ()
   "Make hard newlines invisible again."
   (interactive)
   (setq longlines-showing nil)
-  (let ((os (overlays-in (point-min) (point-max)))
-	o)
-    (while os
-      (setq o (car os)
-	    os (cdr os))
-      (when (overlay-get o 'longlines)
-	(delete-overlay o)))))
+  (let ((pos (text-property-not-all (point-min) (point-max) 'hard nil))
+	(mod (buffer-modified-p))
+	(buffer-undo-list t)
+	(inhibit-read-only t)
+	(inhibit-modification-hooks t)
+	buffer-file-name buffer-file-truename)
+    (while pos
+      (remove-text-properties pos (1+ pos) '(display))
+      (setq pos (text-property-not-all (1+ pos) (point-max) 'hard nil)))
+    (restore-buffer-modified-p mod)))
 
 ;; Wrapping the paragraphs.
 
@@ -251,23 +261,25 @@ by calling `longlines-unshow-hard-newlines'."
   "Wrap each successive line, starting with the line before BEG.
 Stop when we reach lines after END that don't need wrapping, or the
 end of the buffer."
-  (setq longlines-wrap-point (point))
-  (goto-char beg)
-  (forward-line -1)
-  ;; Two successful longlines-wrap-line's in a row mean successive
-  ;; lines don't need wrapping.
-  (while (null (and (longlines-wrap-line)
-                    (or (eobp)
-                        (and (>= (point) end)
-                             (longlines-wrap-line))))))
-  (goto-char longlines-wrap-point))
+  (let ((mod (buffer-modified-p)))
+    (setq longlines-wrap-point (point))
+    (goto-char beg)
+    (forward-line -1)
+    ;; Two successful longlines-wrap-line's in a row mean successive
+    ;; lines don't need wrapping.
+    (while (null (and (longlines-wrap-line)
+		      (or (eobp)
+			  (and (>= (point) end)
+			       (longlines-wrap-line))))))
+    (goto-char longlines-wrap-point)
+    (set-buffer-modified-p mod)))
 
 (defun longlines-wrap-line ()
   "If the current line needs to be wrapped, wrap it and return nil.
 If wrapping is performed, point remains on the line.  If the line does
 not need to be wrapped, move point to the next line and return t."
   (if (longlines-set-breakpoint)
-      (progn (insert-before-markers ?\n)
+      (progn (insert-before-markers-and-inherit ?\n)
 	     (backward-char 1)
              (delete-char -1)
 	     (forward-char 1)
@@ -285,7 +297,7 @@ not need to be wrapped, move point to the next line and return t."
 		     (if (> longlines-wrap-point (point))
 			 (setq longlines-wrap-point
 			       (1- longlines-wrap-point))))
-		 (insert-before-markers-and-inherit ?\ )
+		 (insert-before-markers-and-inherit ?\s)
 		 (backward-char 1)
 		 (delete-char -1)
 		 (forward-char 1))
@@ -364,7 +376,7 @@ If BEG and END are nil, the point and mark are used."
   "Turn all newlines in the buffer into hard newlines."
   (longlines-decode-region (point-min) (point-max)))
 
-(defun longlines-encode-region (beg end &optional buffer)
+(defun longlines-encode-region (beg end &optional _buffer)
   "Replace each soft newline between BEG and END with exactly one space.
 Hard newlines are left intact.  The optional argument BUFFER exists for
 compatibility with `format-alist', and is ignored."
@@ -373,37 +385,49 @@ compatibility with `format-alist', and is ignored."
 	  (mod (buffer-modified-p)))
       (goto-char (min beg end))
       (while (search-forward "\n" reg-max t)
-        (unless (get-text-property (match-beginning 0) 'hard)
-          (replace-match " ")))
+	(let ((pos (match-beginning 0)))
+	  (unless (get-text-property pos 'hard)
+	    (goto-char (1+ pos))
+	    (insert-and-inherit " ")
+	    (delete-region pos (1+ pos))
+	    (remove-text-properties pos (1+ pos) 'hard))))
       (set-buffer-modified-p mod)
       end)))
+
+(defun longlines-encode-string (string)
+  "Return a copy of STRING with each soft newline replaced by a space.
+Hard newlines are left intact."
+  (let* ((str (copy-sequence string))
+         (pos (string-match "\n" str)))
+    (while pos
+      (if (null (get-text-property pos 'hard str))
+          (aset str pos ? ))
+      (setq pos (string-match "\n" str (1+ pos))))
+    str))
 
 ;; Auto wrap
 
 (defun longlines-auto-wrap (&optional arg)
-  "Turn on automatic line wrapping, and wrap the entire buffer.
-With optional argument ARG, turn off line wrapping."
+  "Toggle automatic line wrapping.
+With optional argument ARG, turn on line wrapping if and only if ARG is positive.
+If automatic line wrapping is turned on, wrap the entire buffer."
   (interactive "P")
-  (remove-hook 'after-change-functions 'longlines-after-change-function t)
-  (remove-hook 'post-command-hook 'longlines-post-command-function t)
+  (setq arg (if arg
+		(> (prefix-numeric-value arg) 0)
+	      (not longlines-auto-wrap)))
   (if arg
-      (progn (setq longlines-auto-wrap nil)
-             (message "Auto wrap disabled."))
-    (setq longlines-auto-wrap t)
-    (add-hook 'after-change-functions
-              'longlines-after-change-function nil t)
-    (add-hook 'post-command-hook
-              'longlines-post-command-function nil t)
-    (let ((mod (buffer-modified-p)))
-      (longlines-wrap-region (point-min) (point-max))
-      (set-buffer-modified-p mod))
-    (message "Auto wrap enabled.")))
+      (progn
+	(setq longlines-auto-wrap t)
+	(longlines-wrap-region (point-min) (point-max))
+	(message "Auto wrap enabled."))
+    (setq longlines-auto-wrap nil)
+    (message "Auto wrap disabled.")))
 
-(defun longlines-after-change-function (beg end len)
+(defun longlines-after-change-function (beg end _len)
   "Update `longlines-wrap-beg' and `longlines-wrap-end'.
 This is called by `after-change-functions' to keep track of the region
 that has changed."
-  (unless undo-in-progress
+  (when (and longlines-auto-wrap (not undo-in-progress))
     (setq longlines-wrap-beg
           (if longlines-wrap-beg (min longlines-wrap-beg beg) beg))
     (setq longlines-wrap-end
@@ -412,23 +436,12 @@ that has changed."
 (defun longlines-post-command-function ()
   "Perform line wrapping on the parts of the buffer that have changed.
 This is called by `post-command-hook' after each command."
-  (when longlines-wrap-beg
-    (cond ((or (eq this-command 'yank)
-               (eq this-command 'yank-pop))
-           (longlines-decode-region (point) (mark t))
-           (if longlines-showing
-               (longlines-show-region (point) (mark t))))
-	  (longlines-showing
-	   (cond ((eq this-command 'newline)
-		  (save-excursion
-		    (if (search-backward "\n" nil t)
-			(longlines-show-region
-			 (match-beginning 0) (match-end 0)))))
-		 ((eq this-command 'open-line)
-		  (save-excursion
-		    (if (search-forward "\n" nil t)
-			(longlines-show-region
-			 (match-beginning 0) (match-end 0))))))))
+  (when (and longlines-auto-wrap longlines-wrap-beg)
+    (if (or (eq this-command 'yank)
+	    (eq this-command 'yank-pop))
+	(longlines-decode-region (point) (mark t)))
+    (if longlines-showing
+	(longlines-show-region longlines-wrap-beg longlines-wrap-end))
     (unless (or (eq this-command 'fill-paragraph)
                 (eq this-command 'fill-region))
       (longlines-wrap-region longlines-wrap-beg longlines-wrap-end))
@@ -437,31 +450,35 @@ This is called by `post-command-hook' after each command."
 
 (defun longlines-window-change-function ()
   "Re-wrap the buffer if the window width has changed.
-This is called by `window-size-change-functions'."
-  (when (/= fill-column (- (window-width) window-min-width))
-    (setq fill-column (- (window-width) window-min-width))
-    (let ((mod (buffer-modified-p)))
-      (longlines-wrap-region (point-min) (point-max))
-      (set-buffer-modified-p mod))))
+This is called by `window-configuration-change-hook'."
+  (let ((dw (if (and (integerp longlines-wrap-follows-window-size)
+		     (>= longlines-wrap-follows-window-size 0)
+		     (< longlines-wrap-follows-window-size (window-width)))
+		longlines-wrap-follows-window-size
+	      2)))
+    (when (/= fill-column (- (window-width) dw))
+      (setq fill-column (- (window-width) dw))
+      (longlines-wrap-region (point-min) (point-max)))))
 
-;; Advice for editing functions
+;; Isearch
 
-(defadvice kill-region (before longlines-encode-kill activate)
-  "If the buffer is in `longlines-mode', remove all soft newlines."
-  (when longlines-mode
-    (longlines-encode-region (ad-get-arg 0) (ad-get-arg 1))))
+(defun longlines-search-function ()
+  (cond
+   ((or isearch-regexp-function isearch-regexp) (isearch-search-fun-default))
+   (isearch-forward #'longlines-search-forward)
+   (t #'longlines-search-backward)))
 
-(defadvice copy-region-as-kill (around longlines-encode-kill activate)
-  "If the buffer is in `longlines-mode', remove all soft newlines."
-  (if longlines-mode
-      (let ((string (buffer-substring beg end)))
-        (with-temp-buffer
-          (insert string)
-          (longlines-encode-region (point-min) (point-max))
-          (ad-set-arg 0 (point-min))
-          (ad-set-arg 1 (point-max))
-          ad-do-it))
-    ad-do-it))
+(defun longlines-search-forward (string &optional bound noerror count)
+  (let ((search-spaces-regexp " *[ \n]"))
+    (re-search-forward (regexp-quote string) bound noerror count)))
+
+(defun longlines-search-backward (string &optional bound noerror count)
+  (let ((search-spaces-regexp " *[ \n]"))
+    (re-search-backward (regexp-quote string) bound noerror count)))
+
+(defun longlines-re-search-forward (string &optional bound noerror count)
+  (let ((search-spaces-regexp " *[ \n]"))
+    (re-search-forward string bound noerror count)))
 
 ;; Loading and saving
 
@@ -477,6 +494,17 @@ This is called by `window-size-change-functions'."
  'format-alist
  (list 'longlines "Automatically wrap long lines." nil nil
        'longlines-encode-region t nil))
+
+;; Unloading
+
+(defun longlines-unload-function ()
+  "Unload the longlines library."
+  (save-current-buffer
+    (dolist (buffer (buffer-list))
+      (set-buffer buffer)
+      (longlines-mode-off)))
+  ;; continue standard unloading
+  nil)
 
 (provide 'longlines)
 
