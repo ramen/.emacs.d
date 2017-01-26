@@ -52,6 +52,3 @@
 (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
 (setq magit-revision-insert-related-refs nil)
 (setq magit-status-buffer-switch-function 'switch-to-buffer)
-
-(defadvice magit-diff (after magit-diff-advice activate)
-  (pop-to-buffer "*magit-diff*"))
