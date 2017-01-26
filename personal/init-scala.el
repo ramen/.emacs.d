@@ -25,8 +25,11 @@
               (src-dir (locate-dominating-file default-directory "src"))
               (proj-dirs (nreverse (split-string src-dir "/" t)))
               (subproj (pop proj-dirs))
-              (proj (pop proj-dirs)))
-         (format "cd %s && ./pants test %s/%s::"
-                 pants-root
-                 proj
-                 subproj))))
+              (proj (pop proj-dirs))
+              (target (if (equal proj "source")
+                          subproj
+                        (format "%s/%s" proj subproj)))
+              (target (if (equal target "strato")
+                          "strato/src/test"
+                        target)))
+         (format "cd %s && ./pants test %s::" pants-root target))))
