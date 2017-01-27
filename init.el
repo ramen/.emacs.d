@@ -80,7 +80,7 @@
 
 ;; You can keep system- or user-specific customizations here
 (setq personal-dir (concat dotfiles-dir "personal")
-      system-specific-config (concat dotfiles-dir system-name ".el")
+      system-specific-config (concat dotfiles-dir (system-name) ".el")
       user-specific-config (concat dotfiles-dir user-login-name ".el")
       user-specific-dir (concat dotfiles-dir user-login-name))
 (add-to-list 'load-path personal-dir)
@@ -92,13 +92,8 @@
   (mapc #'load (directory-files user-specific-dir nil ".*el$")))
 (if (file-exists-p user-specific-config) (load user-specific-config))
 
-;; http://stackoverflow.com/questions/24779041/disable-warning-about-emacs-d-in-load-path
-(defadvice display-warning
-    (around no-warn-.emacs.d-in-load-path (type message &rest unused) activate)
-  "Ignore the warning about the `.emacs.d' directory being in `load-path'."
-  (unless (and (eq type 'initialization)
-               (string-prefix-p "Your `load-path' seems to contain\nyour `.emacs.d' directory"
-                                message t))
-    ad-do-it))
+;; Disable warning about .emacs.d in load-path
+(require 'warnings)
+(add-to-list 'warning-suppress-log-types '(initialization))
 
 ;;; init.el ends here
