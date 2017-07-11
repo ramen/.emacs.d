@@ -2,6 +2,7 @@
 
 (require 'scala-mode-auto)
 
+(add-to-list 'auto-mode-alist '("\\.sc$" . scala-mode))
 (add-to-list 'auto-mode-alist '("\\.strato$" . scala-mode))
 
 (add-hook 'scala-mode-hook
@@ -20,9 +21,10 @@
 
 (defun set-pants-compile-command ()
   (set (make-local-variable 'compile-command)
-       (let* ((pants-dir (locate-dominating-file default-directory "BUILD"))
-              (pants-root (locate-dominating-file default-directory "pants"))
-              (src-dir (locate-dominating-file default-directory "src"))
+       (let* ((current-dir (file-truename default-directory))
+              (pants-dir (locate-dominating-file current-dir "BUILD"))
+              (pants-root (locate-dominating-file current-dir "pants"))
+              (src-dir (locate-dominating-file current-dir "src"))
               (proj-dirs (nreverse (split-string src-dir "/" t)))
               (subproj (pop proj-dirs))
               (proj (pop proj-dirs))
