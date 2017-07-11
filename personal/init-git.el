@@ -48,6 +48,7 @@
             (define-key magit-mode-map (kbd "M-3") 'digit-argument)
             (define-key magit-mode-map (kbd "M-4") 'digit-argument)))
 
+(setq magit-auto-revert-mode nil)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 (setq magit-default-tracking-name-function 'magit-default-tracking-name-branch-only)
 (setq magit-revision-insert-related-refs nil)
