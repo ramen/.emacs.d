@@ -11,7 +11,8 @@
             (define-key rjsx-mode-map (kbd "<") nil)
             (define-key rjsx-mode-map (kbd "C-c /") 'sgml-close-tag)))
 
-(add-to-list 'auto-mode-alist '("\\.jsx$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 (setq js2-enter-indents-newline t)

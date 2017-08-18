@@ -15,6 +15,7 @@
                                    'idle-highlight-mode
                                    'ido-ubiquitous
                                    'magit
+                                   'rjsx-mode
                                    'ruby-mode
                                    'scss-mode
                                    'tuareg
