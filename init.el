@@ -30,6 +30,7 @@
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
 (setq custom-file (concat dotfiles-dir "custom.el"))
+(setq byte-compile-warnings '(cl-functions))
 
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")))

@@ -77,7 +77,7 @@
 
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
-(ido-ubiquitous-mode t)
+;; (ido-ubiquitous-mode t)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       ido-auto-merge-work-directories-length nil
