@@ -43,10 +43,13 @@
 ;; Tiling windows
 (global-set-key (kbd "<S-s-return>") 'split-window-dwim)
 (global-set-key (kbd "<s-return>") 'swap-with-largest-window)
+(global-set-key (kbd "s-'") 'swap-with-largest-window)
+(global-set-key (kbd "s-:") 'delete-window-and-balance)
 (global-set-key (kbd "s-C") 'delete-window-and-balance)
 (global-set-key (kbd "s-J") 'rotate-windows)
 (global-set-key (kbd "s-K") 'rotate-windows-reverse)
 (global-set-key (kbd "s-[") 'shrink-first-window-horizontally)
+(global-set-key (kbd "s-\"") 'split-window-dwim)
 (global-set-key (kbd "s-]") 'enlarge-first-window-horizontally)
 (global-set-key (kbd "s-j") 'other-window)
 (global-set-key (kbd "s-k") 'other-window-reverse)

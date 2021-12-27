@@ -13,6 +13,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.js$" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts$" . js-mode))
 (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
 
 (setq js2-enter-indents-newline t)
