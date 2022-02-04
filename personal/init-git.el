@@ -20,14 +20,8 @@
 
 (eval-after-load 'magit
   '(progn
-     (magit-define-popup-switch 'magit-log-popup ?f "first parent" "--first-parent")
-     (magit-remove-popup-key 'magit-diff-popup   :action ?d)
-     (magit-change-popup-key 'magit-diff-popup   :action ?r ?d)
-     ;; https://github.com/magit/magit/wiki/Restore-pre-v2.4-key-bindings
-     (magit-change-popup-key 'magit-fetch-popup  :action ?u ?f)
-     (magit-change-popup-key 'magit-pull-popup   :action ?u ?F)
-     (magit-change-popup-key 'magit-rebase-popup :action ?e ?r)
-     (magit-change-popup-key 'magit-push-popup   :action ?p ?P)))
+     (transient-suffix-put 'magit-pull "u" :key "F")
+     (transient-suffix-put 'magit-push "u" :key "P")))
 
 (eval-after-load 'magit-key-mode
   '(progn
