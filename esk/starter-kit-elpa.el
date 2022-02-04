@@ -13,7 +13,7 @@
                                    'flymake-ruby
                                    'full-ack
                                    'idle-highlight-mode
-                                   ;; 'ido-ubiquitous
+                                   'lua-mode
                                    'magit
                                    'rjsx-mode
                                    'ruby-mode
