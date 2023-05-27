@@ -4,6 +4,12 @@
 (require 'color-theme-tango-2)
 (color-theme-tango-2)
 
+(defun set-opacity ()
+  "Set opacity of current window"
+  (interactive)
+  (let ((opacity (read-number "Opacity: ")))
+    (set-frame-parameter (selected-frame) 'alpha (list opacity opacity))))
+
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "gray10")
 
