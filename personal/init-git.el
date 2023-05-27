@@ -5,6 +5,7 @@
 
 (setq git-blame-prefix-format "%h %20.20a ")
 (setq git-commit-summary-max-length 72)
+(setq transient-default-level 7)
 
 (defalias 'vc-blame 'vc-annotate)
 
@@ -20,8 +21,11 @@
 
 (eval-after-load 'magit
   '(progn
+     (transient-suffix-put 'magit-diff "r" :key "d")
+     (transient-suffix-put 'magit-fetch "u" :key "f")
      (transient-suffix-put 'magit-pull "u" :key "F")
-     (transient-suffix-put 'magit-push "u" :key "P")))
+     (transient-suffix-put 'magit-push "u" :key "P")
+     (transient-suffix-put 'magit-rebase "e" :key "r")))
 
 (eval-after-load 'magit-key-mode
   '(progn
