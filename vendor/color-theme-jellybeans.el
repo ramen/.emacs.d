@@ -50,7 +50,7 @@
      (trailing-whitespace ((t (:background "#252525"))))
      (minibuffer-prompt ((t (:foreground "#8fbfdc" :bold t))))
      (highlight ((t (:background "#1c1c1c"))))
-     (hl-line ((t (:background "#1c1c1c"))))
+     ;; (hl-line ((t (:background "#1c1c1c"))))
      (show-paren-match ((t (:foreground "#ffffff" :background "#80a090"))))
      (font-lock-warning-face ((t (:foreground "#902020" :bold t)))))))
 
