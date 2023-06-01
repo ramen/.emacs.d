@@ -79,7 +79,7 @@
   (set-face-background 'region "gray")
   (set-face-background 'show-paren-match "gray")
   (set-face-background 'show-paren-mismatch "red")
-  (set-face-foreground 'default "black")
+  (set-face-foreground 'default "white")
   (set-face-foreground 'esk-paren-face "white")
   (set-face-foreground 'font-lock-builtin-face "blue")
   (set-face-foreground 'font-lock-comment-delimiter-face "white")

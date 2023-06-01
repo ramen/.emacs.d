@@ -22,9 +22,9 @@
       ffip-patterns '("*.css" "*.el" "*.html" "*.java" "*.js" "*.mustache"
                       "*.rb" "*.rhtml" "*.scala" "*.txt")
       ffip-project-file "pom.xml"
-      grep-command "grep -nHP -e "
-      grep-find-template "find . <X> -type f <F> -exec grep <C> -nHP -e <R> {} /dev/null \\;"
-      grep-template "grep <C> -nHP -e <R> <F>"
+      grep-command "grep -nH -e "
+      grep-find-template "find . <X> -type f <F> -exec grep <C> -nH -e <R> {} /dev/null \\;"
+      grep-template "grep <C> -nH -e <R> <F>"
       ido-ubiquitous-command-exceptions '(describe-function
                                           describe-variable
                                           execute-extended-command)
