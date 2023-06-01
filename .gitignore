@@ -2,6 +2,7 @@ loaddefs.el*
 backups/*
 auto-save-list
 custom.el
+dave.el
 daveb.el
 ramen.el
 *elc
