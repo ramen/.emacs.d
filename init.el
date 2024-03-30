@@ -33,7 +33,7 @@
 (setq byte-compile-warnings '(cl-functions))
 
 (require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 (require 'starter-kit-elpa)
 
