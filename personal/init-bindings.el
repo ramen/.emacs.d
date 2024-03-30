@@ -79,6 +79,7 @@
 (global-set-key (kbd "M-#") 'comment-line)
 (global-set-key (kbd "M-+") 'duplicate-line-or-region)
 (global-set-key (kbd "M-`") 'next-error)
+(global-set-key (kbd "s-`") 'next-error)
 
 ;; Other useful commands
 (global-set-key (kbd "C-=") 'er/expand-region)
