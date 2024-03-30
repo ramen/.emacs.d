@@ -3,6 +3,7 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (c-set-style "java")
+            (c-set-offset 'access-label '-)
             (c-set-offset 'case-label '+)
             (c-set-offset 'substatement-open 0)
             (setq c-basic-offset tab-width)
