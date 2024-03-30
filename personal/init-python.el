@@ -8,6 +8,7 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (esk-prog-mode-hook)
+            (setq-local tab-width py-indent-offset)
             (when (boundp 'python-mode-map)
               (define-key python-mode-map "\C-c\C-s" 'python-shell))
             (when (boundp 'py-mode-map)
