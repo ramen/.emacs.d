@@ -13,6 +13,10 @@
 (global-hl-line-mode 1)
 (set-face-background 'hl-line "gray10")
 
+(add-hook 'idle-highlight-mode-hook
+          (lambda ()
+            (set-face-background 'idle-highlight "gray20")))
+
 (add-hook 'erc-mode-hook
           (lambda ()
             (make-local-variable 'global-hl-line-mode)
