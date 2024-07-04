@@ -40,6 +40,7 @@
       sentence-end-double-space nil
       split-width-threshold 140
       tramp-default-method "sshx"
+      tramp-persistency-file-name nil
       uniquify-buffer-name-style 'post-forward-angle-brackets
       which-func-modes t
       window-combination-resize t)
